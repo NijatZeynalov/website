@@ -1,0 +1,957 @@
+html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Future of AI in Enterprise: 2025 Predictions - AI Consultant Blog</title>
+    <!-- Use a modern font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Basic Reset & Variables (Consistent across pages) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #f093fb;
+            --text-dark: #1f2937; /* Slightly darker for more contrast */
+            --text-medium: #4b5563; /* New: for descriptions */
+            --text-light: #9ca3af; /* Slightly adjusted */
+            --bg-dark: #111827; /* Darker */
+            --bg-light: #f3f4f6; /* Lighter */
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --card-bg: #ffffff;
+            --card-shadow: 0 12px 40px rgba(0, 0, 0, 0.08); /* Softer shadow */
+            --border-radius-lg: 20px;
+            --border-radius-md: 15px;
+            --border-radius-sm: 8px;
+            --navbar-height: 60px; /* Approximate height */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif; /* Use the new font */
+            line-height: 1.7; /* Slightly increased line height */
+            color: var(--text-dark);
+            background: var(--bg-light); /* Default background */
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem; /* Consistent horizontal padding */
+        }
+
+        .section-padding {
+            padding: 8rem 0; /* More vertical padding */
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Navigation (Consistent across pages) */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: background 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+             min-height: var(--navbar-height);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out, visibility 0.4s;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-medium);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+            justify-content: space-between;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background: var(--text-dark);
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+            transform-origin: left center;
+        }
+
+        /* Mobile Menu Active State (Consistent across pages) */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: var(--navbar-height);
+                left: 0;
+                width: 100%;
+                height: calc(100vh - var(--navbar-height));
+                background: var(--card-bg);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                transform: translateX(-100%);
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+                opacity: 1;
+                visibility: visible;
+                overflow-y: auto;
+            }
+
+            .nav-links li {
+                 width: 100%;
+                 text-align: center;
+                 padding: 1rem 0;
+                 border-bottom: 1px solid var(--bg-light);
+            }
+
+             .nav-links li:last-child {
+                 border-bottom: none;
+             }
+
+            .nav-links a {
+                font-size: 1.2rem;
+                color: var(--text-dark);
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+             /* Animate toggle icon */
+            .nav-toggle.active span:nth-child(1) { transform: rotate(45deg); }
+            .nav-toggle.active span:nth-child(2) { opacity: 0; }
+            .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg); }
+        }
+
+        /* Article Header (Specific to article pages) */
+        .article-hero {
+             padding: calc(var(--navbar-height) + 4rem) 2rem 3rem; /* Add navbar height offset */
+             background: var(--gradient-1);
+             color: white;
+             text-align: center;
+             position: relative;
+             overflow: hidden;
+        }
+         .article-hero::before {
+             content: '';
+             position: absolute;
+             top: 0;
+             left: 0;
+             right: 0;
+             bottom: 0;
+             background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 60%);
+             z-index: 1;
+         }
+
+        .article-header {
+            max-width: 800px;
+            margin: 0 auto;
+            z-index: 2;
+            position: relative;
+             /* Initial state for JS animation */
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .article-header h1 {
+            font-size: 3.5rem; /* Article title size */
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .article-meta {
+            font-size: 1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 2rem;
+             font-weight: 400;
+        }
+         .article-meta span { margin: 0 5px; }
+
+
+        /* Main Article Content */
+        .article-content-wrapper {
+            padding: var(--section-padding) 0;
+            background: var(--bg-light);
+        }
+        .article-content {
+            max-width: 800px;
+            margin: 0 auto; /* Center the content */
+            padding: 0 2rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+             /* Initial state for JS animation */
+             opacity: 0;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+            color: var(--text-medium); /* Use medium color for body text */
+        }
+
+        .article-content h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 2.5rem 0 1.2rem; /* Space above and below subheadings */
+            position: relative;
+        }
+         .article-content h2::after {
+             content: '';
+             position: absolute;
+             left: 0;
+             bottom: -5px;
+             width: 40px;
+             height: 3px;
+             background: var(--gradient-1);
+             border-radius: 2px;
+         }
+
+
+        .article-content h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin: 2rem 0 1rem;
+        }
+
+        .article-content ul, .article-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 20px;
+        }
+
+        .article-content li {
+            margin-bottom: 0.5rem;
+             color: var(--text-medium);
+        }
+
+        .article-content a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+             border-bottom: 1px dotted var(--primary-color); /* Subtle underline */
+        }
+        .article-content a:hover {
+             color: var(--secondary-color);
+             border-bottom-color: var(--secondary-color);
+        }
+
+        .article-content blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding: 1rem 1.5rem;
+            margin: 2rem 0;
+            background: rgba(102, 126, 234, 0.05);
+            font-style: italic;
+            color: var(--text-dark);
+        }
+         .article-content blockquote p { margin-bottom: 0; color: inherit;} /* Remove margin from last p in blockquote */
+
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            margin: 2rem auto; /* Center images */
+            display: block;
+            border-radius: var(--border-radius-sm);
+             box-shadow: var(--card-shadow);
+        }
+
+         .highlight { /* Consistent with My Story */
+            background: linear-gradient(120deg, rgba(102, 126, 234, 0.15) 0%, rgba(240, 147, 251, 0.15) 100%);
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+         /* Author Bio Section */
+         .author-bio {
+             max-width: 800px;
+             margin: 4rem auto;
+             padding: 2rem;
+             background: var(--card-bg);
+             border-radius: var(--border-radius-md);
+             box-shadow: var(--card-shadow);
+             display: flex;
+             align-items: center;
+             gap: 1.5rem;
+             border: 1px solid rgba(102, 126, 234, 0.1);
+              /* Initial state for JS animation */
+             opacity: 0;
+             transform: translateY(50px);
+         }
+         .author-bio img {
+             width: 100px;
+             height: 100px;
+             border-radius: 50%;
+             border: 3px solid var(--primary-color);
+             flex-shrink: 0; /* Prevent image from shrinking */
+             margin: 0; /* Remove default image margin */
+             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+         }
+         .author-info h4 {
+             font-size: 1.3rem;
+             font-weight: 600;
+             margin-bottom: 0.5rem;
+             color: var(--text-dark);
+         }
+         .author-info p {
+             font-size: 0.95rem;
+             color: var(--text-medium);
+             margin-bottom: 1rem;
+         }
+         .author-info a {
+             color: var(--primary-color);
+             text-decoration: none;
+             font-weight: 500;
+             transition: color 0.3s ease;
+         }
+         .author-info a:hover {
+             color: var(--secondary-color);
+         }
+
+
+         /* Related Content / CTA Section */
+         .related-content {
+             max-width: 800px;
+             margin: 4rem auto;
+             padding: 2rem;
+             background: rgba(102, 126, 234, 0.05); /* Subtle background */
+             border-radius: var(--border-radius-md);
+              /* Initial state for JS animation */
+             opacity: 0;
+             transform: translateY(50px);
+         }
+         .related-content h3 {
+             font-size: 1.8rem;
+             font-weight: 700;
+             color: var(--text-dark);
+             margin-bottom: 1.5rem;
+         }
+         .related-content ul {
+             list-style: none;
+             padding: 0;
+             margin-bottom: 1.5rem;
+         }
+          .related-content li {
+              margin-bottom: 1rem;
+              font-size: 1.1rem;
+          }
+          .related-content li i {
+              margin-right: 10px;
+              color: var(--primary-color);
+          }
+         .related-content a {
+             color: var(--primary-color);
+             text-decoration: none;
+             font-weight: 500;
+             transition: color 0.3s ease;
+         }
+         .related-content a:hover {
+             color: var(--secondary-color);
+         }
+
+         .related-content .cta {
+             margin-top: 2rem;
+             text-align: center;
+         }
+
+
+        /* Button Styling (Consistent across pages) */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--gradient-2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+             position: relative;
+             overflow: hidden;
+             z-index: 1;
+             text-align: center;
+        }
+
+         .btn span { position: relative; z-index: 1; } /* Added span wrapper */
+
+         .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease;
+            z-index: 0;
+        }
+
+         .btn:hover::before { width: 300px; height: 300px; }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+        }
+
+
+        /* Footer (Consistent across pages) */
+        footer {
+            background: var(--bg-dark);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 4rem 2rem 1.5rem;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            font-weight: 500;
+        }
+
+        .footer-links a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+            color: var(--bg-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(240, 147, 251, 0.3);
+        }
+
+        /* Animations */
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+         /* Particles keyframe (keep for consistency) */
+        @keyframes float-particle {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+             50% { transform: translateY(50vh) translateX(10vw) rotate(180deg); opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(-10vw) rotate(360deg); opacity: 0; }
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+             .article-header h1 { font-size: 2.8rem; }
+             .article-content { font-size: 1rem; }
+             .article-content h2 { font-size: 1.8rem; }
+             .article-content h3 { font-size: 1.4rem; }
+             .author-bio { gap: 1rem; padding: 1.5rem; }
+             .author-bio img { width: 80px; height: 80px; }
+             .author-info h4 { font-size: 1.2rem; }
+             .author-info p { font-size: 0.9rem; }
+             .related-content h3 { font-size: 1.6rem; }
+             .related-content li { font-size: 1rem; }
+        }
+
+
+        @media (max-width: 768px) {
+             /* Navigation mobile styles handled above */
+
+             .article-hero { padding: calc(var(--navbar-height) + 2rem) 1rem 2rem; }
+             .article-header h1 { font-size: 2.2rem; }
+             .article-meta { font-size: 0.9rem; }
+
+             .section-padding { padding: 4rem 0; }
+
+             .article-content {
+                 font-size: 0.95rem;
+                 line-height: 1.7;
+                 padding: 0 1rem;
+                  opacity: 1 !important; /* Disable animation on mobile */
+                  transform: none !important;
+                  animation: none !important;
+             }
+             .article-content p { margin-bottom: 1rem; }
+             .article-content h2 { font-size: 1.6rem; margin: 2rem 0 1rem; }
+             .article-content h2::after { width: 30px; height: 2px; }
+             .article-content h3 { font-size: 1.3rem; margin: 1.5rem 0 0.8rem; }
+             .article-content ul, .article-content ol { margin-bottom: 1rem; padding-left: 15px;}
+             .article-content li { margin-bottom: 0.3rem;}
+             .article-content blockquote { padding: 0.8rem 1.2rem; margin: 1.5rem 0;}
+
+             .article-content img { margin: 1.5rem auto;}
+
+             .author-bio {
+                 flex-direction: column; /* Stack on mobile */
+                 text-align: center;
+                 padding: 1.5rem;
+                 transform: translateY(0) !important; /* Disable animation on mobile */
+                 opacity: 1 !important; /* Disable animation on mobile */
+                 margin: 3rem auto;
+             }
+             .author-bio img { margin-bottom: 1rem;}
+             .author-info h4 { font-size: 1.1rem;}
+             .author-info p { font-size: 0.85rem; margin-bottom: 0.8rem;}
+
+             .related-content {
+                 padding: 1.5rem;
+                 margin: 3rem auto;
+                 transform: translateY(0) !important; /* Disable animation on mobile */
+                 opacity: 1 !important; /* Disable animation on mobile */
+             }
+              .related-content h3 { font-size: 1.4rem; margin-bottom: 1rem;}
+              .related-content ul { margin-bottom: 1rem;}
+              .related-content li { font-size: 1rem;}
+              .related-content li i { margin-right: 5px;}
+
+
+            /* Footer mobile styles handled above */
+            .footer-links { gap: 1rem; }
+             .social-links { gap: 1rem; }
+        }
+
+         /* Ensure animations are off by default on mobile, enabled by JS if > 768px */
+         @media (max-width: 768px) {
+             /* Elements targeted by JS animation on desktop */
+              /* Hero elements animate on load, not scroll, so no need to explicitly reset transform/opacity for them */
+              /* .article-header, */ /* Hero element */
+             .author-bio,
+             .related-content {
+                 opacity: 1 !important;
+                 transform: none !important;
+                 animation: none !important;
+             }
+         }
+
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">AI Consultant</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="my-story.html">My Story</a></li>
+                <li><a href="expertise.html">Expertise</a></li>
+                <li><a href="case-studies.html">Case Studies</a></li>
+                <li><a href="consulting-services.html">Services</a></li>
+                <li><a href="talks.html">Talks</a></li>
+                <li><a href="training.html">Training Programs</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+             <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Adapted for article title) -->
+    <section class="article-hero">
+         <div class="article-header" data-animate="slideInUp" data-delay="0.3">
+            <h1>The Future of AI in Enterprise: 2025 Predictions</h1>
+            <div class="article-meta">
+                <span>By AI Consultant</span>
+                <span>•</span>
+                <span>January 15, 2025</span>
+                <span>•</span>
+                <span>5 min read</span>
+                <span>•</span>
+                <span>Strategy</span> <!-- Category/Tags -->
+            </div>
+         </div>
+    </section>
+
+
+    <!-- Main Article Content -->
+    <section class="article-content-wrapper">
+        <div class="article-content" data-animate="fadeIn" data-delay="0.8"> <!-- Fade in article content -->
+
+            <p>The rapid advancements in Artificial Intelligence are reshaping the business landscape at an unprecedented pace. As we look towards 2025, several key trends stand out, indicating significant shifts in how enterprises will leverage AI for competitive advantage.</p>
+
+            <h2>AI Integration Becomes Ubiquitous</h2>
+            <p>AI is no longer confined to specialized departments or experimental projects. By 2025, expect to see AI capabilities embedded deeply within core business functions – from HR and marketing to operations and supply chain management. This isn't just about adopting AI tools; it's about fundamentally redesigning workflows to harness AI's power. Businesses that successfully achieve this deep integration will gain significant efficiencies and unlock new growth opportunities. <a href="consulting-services.html#strategy">Learn more about AI Strategy consulting.</a></p>
+
+            <h3>Hyper-Personalization at Scale</h3>
+            <p>Leveraging sophisticated machine learning models, companies will deliver hyper-personalized experiences to customers, employees, and partners. This goes beyond simple recommendations; it involves anticipating needs, tailoring communication styles, and optimizing interactions in real-time across multiple touchpoints. NLP and predictive analytics will be key enablers here. <a href="expertise.html#nlp">Explore my NLP expertise.</a></p>
+
+            <h2>Focus on Explainable and Trustworthy AI (XAI)</h2>
+            <p>As AI systems become more complex and influential in decision-making, the demand for transparency and trustworthiness will surge. Regulatory pressures and the need for user adoption will push organizations towards Explainable AI (XAI) techniques. Businesses will invest in tools and processes to understand *why* an AI model made a particular prediction or decision, building confidence and mitigating risks. This is a critical area for responsible AI adoption. <a href="case-studies.html#responsible-ai-case">See a case study on responsible AI implementation.</a></p>
+
+            <blockquote>
+                <p> "The future of enterprise AI lies not just in powerful algorithms, but in their ethical, explainable, and seamlessly integrated application."</p>
+            </blockquote>
+
+            <h2>Democratization of AI Tools</h2>
+            <p>No-code and low-code AI platforms will continue to proliferate, making AI development and deployment accessible to a wider range of business users, not just data scientists. This democratization will accelerate innovation within organizations, allowing domain experts to build custom AI solutions tailored to their specific needs. This shift also increases the need for robust governance and MLOps practices to ensure consistency and control. <a href="expertise.html#mlops">Understand MLOps and Deployment.</a></p>
+
+            <h3>The Rise of Generative AI in Business</h3>
+            <p>While Generative AI has captured public attention, its enterprise applications are just beginning to mature. By 2025, expect to see significant use cases in content creation (marketing copy, reports), code generation (developer productivity), synthetic data generation (training models), and accelerating design processes. Businesses will need strategies to safely and effectively integrate these powerful models. I often discuss this topic in my <a href="talks.html">speaking engagements</a>.</p>
+
+             <img src="https://via.placeholder.com/800x450" alt="AI in enterprise chart example"> <!-- Placeholder Image -->
+             <p style="text-align: center; font-size: 0.9rem; color: var(--text-light);">Fig 1: Projected growth areas for AI in enterprise by 2025 (Illustrative)</p>
+
+
+            <h2>Upskilling the Workforce</h2>
+            <p>The increasing adoption of AI necessitates a significant focus on workforce upskilling. Employees need to understand how to work *with* AI systems, interpret their outputs, and adapt to new AI-powered workflows. Organizations will invest heavily in training programs to build AI fluency across the board. This is a core part of my <a href="training.html">AI Training Programs</a>.</p>
+
+            <p>In conclusion, 2025 promises to be a pivotal year for enterprise AI. Businesses that proactively invest in integration, trustworthiness, democratization, and workforce development will be best positioned to capitalize on AI's transformative potential.</p>
+
+            <p>What are your predictions for enterprise AI in 2025? Share your thoughts below (if comments were enabled).</p>
+
+            <hr style="margin: 4rem auto; max-width: 200px; border-color: rgba(0,0,0,0.1);"> <!-- Separator -->
+
+            <!-- Author Bio -->
+            <div class="author-bio" data-animate="slideInUp" data-delay="0.2">
+                <img src="https://via.placeholder.com/150" alt="AI Consultant Photo"> <!-- Placeholder Photo -->
+                <div class="author-info">
+                    <h4>About the Author</h4>
+                    <p>AI Consultant is a Senior AI Strategist & Trainer with 5+ years of experience helping organizations navigate the AI landscape. With over 50 published articles and 70+ speaking engagements, they are passionate about making AI accessible and actionable for businesses. <a href="my-story.html">Read more about their story.</a></p>
+                </div>
+            </div>
+
+            <!-- Related Content / CTA Section -->
+            <div class="related-content" data-animate="slideInUp" data-delay="0.4">
+                <h3>Continue Your AI Journey</h3>
+                <ul>
+                    <li><i class="fas fa-external-link-alt"></i> Explore other articles in the <a href="blog.html?category=strategy">Strategy category</a>.</li>
+                    <li><i class="fas fa-check-circle"></i> See <a href="case-studies.html">Case Studies</a> demonstrating successful AI implementations.</li>
+                    <li><i class="fas fa-graduation-cap"></i> Learn about <a href="training.html">Training Programs</a> to build AI capabilities in your team.</li>
+                    <li><i class="fas fa-comments"></i> <a href="contact.html">Contact me</a> to discuss your AI strategy.</li>
+                </ul>
+                 <!-- Optional: Add a button CTA -->
+                 <!-- <div class="cta"><a href="contact.html" class="btn"><span>Discuss Your Project</span></a></div> -->
+            </div>
+
+
+        </div>
+    </section>
+
+
+    <!-- Footer (Consistent across pages) -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="my-story.html">My Story</a>
+                <a href="expertise.html">Expertise</a>
+                <a href="case-studies.html">Case Studies</a>
+                <a href="consulting-services.html">Services</a>
+                <a href="talks.html">Talks</a>
+                <a href="training.html">Training Programs</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-medium-m"></i></a>
+            </div>
+            <p>&copy; <span id="current-year"></span> AI Consultant. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Navbar Scroll Effect ---
+        const navbar = document.getElementById('navbar');
+        if (navbar) {
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // --- Floating Particles (Optional for this page) ---
+        // Uncomment and ensure particles div exists in HTML if you want them here
+        /*
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            if (!particlesContainer) return;
+
+            const particleCount = window.innerWidth > 768 ? 80 : 40;
+            particlesContainer.innerHTML = '';
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = Math.random() * 4 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 20 + 100 + '%'; // Start below viewport
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                particle.style.opacity = Math.random() * 0.5 + 0.3;
+                particlesContainer.appendChild(particle);
+            }
+        }
+        */
+
+        // --- Intersection Observer for Scroll Animations ---
+        // On article pages, we primarily animate elements below the main content on scroll (bio, related).
+        // The main article content appears on load.
+        const scrollAnimatedElements = document.querySelectorAll('.author-bio, .related-content'); // Select specific elements to animate on scroll
+
+        const scrollObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const targetElement = entry.target;
+                    const delay = targetElement.dataset.delay ? parseFloat(targetElement.dataset.delay) * 1000 : 0;
+                    const animationType = targetElement.dataset.animate || 'fadeIn'; // Default to fadeIn
+
+                    setTimeout(() => {
+                        // Apply the animation
+                        targetElement.style.animation = `${animationType} 0.8s ease-out forwards`;
+                         // No counters or staggered grids on article pages
+
+                    }, delay);
+
+                    // Unobserve the element once it has intersected
+                    observer.unobserve(targetElement);
+                }
+                 /* No action needed when element is not intersecting */
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' });
+
+
+        // --- Apply initial state and Trigger load animations ---
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Blog Article DOM fully loaded and parsed');
+
+            // Optional: Create particles if div exists
+            // createParticles();
+
+            // Set current year in footer
+            const currentYearSpan = document.getElementById('current-year');
+            if (currentYearSpan) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+
+            // Animate elements that should appear on page load (Hero elements, main content)
+            const loadAnimatedElements = document.querySelectorAll('.article-header, .article-content');
+
+            loadAnimatedElements.forEach(el => {
+                 // Apply initial state (set in CSS)
+                 // Trigger animation
+                 const delay = el.dataset.delay ? parseFloat(el.dataset.delay) * 1000 : 0;
+                 const animationType = el.dataset.animate || 'fadeIn';
+
+                 setTimeout(() => {
+                      el.style.animation = `${animationType} 0.8s ease-out forwards`;
+                 }, delay);
+            });
+
+
+            // Set initial hidden state for elements that animate on scroll (Bio, Related Content)
+             scrollAnimatedElements.forEach(el => {
+                 el.style.opacity = '0';
+                 const animateType = el.dataset.animate;
+                 if (animateType === 'slideInUp') el.style.transform = 'translateY(50px)';
+                 else if (animateType === 'slideInLeft') el.style.transform = 'translateX(-50px)';
+                 else if (animateType === 'slideInRight') el.style.transform = 'translateX(50px)';
+                 // fadeIn doesn't need initial transform
+
+                  // Start observing these elements
+                 scrollObserver.observe(el);
+             });
+
+
+        });
+
+
+        // --- Mobile menu toggle ---
+        const navToggle = document.querySelector('.nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (navToggle && navLinks) { // Check if elements exist
+            navToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                navToggle.classList.toggle('active'); // Toggle class on toggle icon for animation
+                // Optional: Prevent body scroll when menu is open
+                 // document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+            });
+
+             // Close menu when a link is clicked (mobile)
+             navLinks.querySelectorAll('a').forEach(link => {
+                 link.addEventListener('click', () => {
+                     if (navLinks.classList.contains('active')) {
+                         navLinks.classList.remove('active');
+                         navToggle.classList.remove('active');
+                         // Optional: Restore body scroll
+                         // document.body.style.overflow = '';
+                     }
+                 });
+             });
+        }
+
+
+        // --- Smooth scrolling for anchor links ---
+         // This page has no internal anchor links (#...).
+         // Keeping the function for completeness and future use.
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                 if (this.getAttribute('href').length > 1) {
+                     e.preventDefault();
+                 } else {
+                     return; // If href is just "#", let it scroll to top
+                 }
+
+                // Close mobile menu if open
+                 if (navLinks && navLinks.classList.contains('active')) {
+                     navLinks.classList.remove('active');
+                     navToggle.classList.remove('active');
+                 }
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    const offset = navbar ? navbar.offsetHeight : 0;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,1170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Consulting & Training - Transform Your Business with AI</title>
+    <!-- Use a modern font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Basic Reset & Variables */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #f093fb;
+            --text-dark: #1f2937; /* Slightly darker for more contrast */
+            --text-medium: #4b5563; /* New: for descriptions */
+            --text-light: #9ca3af; /* Slightly adjusted */
+            --bg-dark: #111827; /* Darker */
+            --bg-light: #f3f4f6; /* Lighter */
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --card-bg: #ffffff;
+            --card-shadow: 0 12px 40px rgba(0, 0, 0, 0.08); /* Softer shadow */
+            --border-radius-lg: 20px;
+            --border-radius-md: 15px;
+            --border-radius-sm: 8px;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif; /* Use the new font */
+            line-height: 1.7; /* Slightly increased line height */
+            color: var(--text-dark);
+            background: var(--bg-light); /* Default background */
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem; /* Consistent horizontal padding */
+        }
+
+        .section-padding {
+            padding: 8rem 0; /* More vertical padding */
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: background 0.4s ease, box-shadow 0.4s ease; /* Smoother transition */
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05); /* Softer shadow on scroll */
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700; /* Bolder logo */
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem; /* Slightly increased gap */
+            transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out, visibility 0.4s; /* For mobile menu animation */
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-medium); /* Softer link color */
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 5px; /* Space for underline */
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0; /* Align with padding */
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            width: 30px; /* Slightly larger target */
+            height: 20px; /* Height for 3 bars */
+            justify-content: space-between;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background: var(--text-dark);
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+            transform-origin: left center; /* For rotation */
+        }
+
+        /* Mobile Menu Active State */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 60px; /* Below navbar */
+                left: 0;
+                width: 100%;
+                height: calc(100vh - 60px); /* Full height below navbar */
+                background: var(--card-bg);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                transform: translateX(-100%); /* Start off-screen */
+                opacity: 0; /* Hidden initially */
+                visibility: hidden; /* Hide from screen readers */
+            }
+
+            .nav-links.active {
+                transform: translateX(0); /* Slide in */
+                opacity: 1; /* Fade in */
+                visibility: visible;
+                overflow-y: auto; /* Allow scrolling if menu is long */
+            }
+
+            .nav-links li {
+                 width: 100%;
+                 text-align: center;
+                 padding: 1rem 0;
+                 border-bottom: 1px solid var(--bg-light); /* Separator */
+            }
+
+             .nav-links li:last-child {
+                 border-bottom: none;
+             }
+
+            .nav-links a {
+                font-size: 1.2rem;
+                color: var(--text-dark);
+            }
+
+             /* Animate toggle icon */
+            .nav-toggle.active span:nth-child(1) {
+                transform: rotate(45deg);
+            }
+            .nav-toggle.active span:nth-child(2) {
+                opacity: 0; /* Hide middle bar */
+            }
+            .nav-toggle.active span:nth-child(3) {
+                transform: rotate(-45deg);
+            }
+        }
+
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: var(--gradient-1); /* Consistent gradient */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px; /* Offset for fixed navbar */
+        }
+
+        /* Hero background effects (circles removed, relying more on particles) */
+         .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+             /* Subtle radial gradient overlay */
+            background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 60%);
+             z-index: 1;
+        }
+
+
+        .hero-content {
+            max-width: 900px; /* Slightly wider */
+            z-index: 3; /* Above particles */
+            position: relative;
+            padding: 0 2rem; /* Added padding */
+        }
+
+        .hero h1, .hero h2, .hero p, .hero .stats, .hero .cta-buttons {
+             /* Initial state for JS animation, override existing CSS animations if needed */
+             /* Commented out as JS will set opacity/transform and add animation */
+             /* opacity: 0; */
+             /* transform: translateY(30px); */
+        }
+
+        /* Specific initial states for CSS animations (can be overridden by JS) */
+        .hero h1 { font-size: 4.5rem; margin-bottom: 1rem; font-weight: 700; letter-spacing: -0.5px;}
+        .hero h2 { font-size: 1.6rem; margin-bottom: 1.5rem; font-weight: 400;}
+        .hero p { font-size: 1.1rem; max-width: 700px; margin: 0 auto 3rem;}
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 4rem; /* Increased gap */
+            margin-bottom: 3rem;
+            flex-wrap: wrap; /* Wrap stats on smaller screens */
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3.5rem; /* Larger number */
+            font-weight: 700; /* Bolder */
+            display: block;
+            margin-bottom: 0.25rem; /* Less space */
+             /* Initial state for counter animation handled by JS */
+             /* opacity: 0; transform: translateY(20px); */
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9; /* Slightly more opaque */
+            font-weight: 500;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem; /* Increased gap */
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem; /* More padding */
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+            text-align: center; /* Ensure text is centered */
+        }
+
+         /* Subtle button hover effect */
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease;
+            z-index: 0; /* Behind text */
+        }
+
+         .btn:hover::before {
+             width: 300px;
+             height: 300px;
+         }
+
+         .btn span {
+             position: relative;
+             z-index: 1; /* Above ::before */
+         }
+
+
+        .btn-primary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.4); /* Slightly stronger border */
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-primary:hover {
+             background: rgba(255, 255, 255, 0.3);
+             transform: translateY(-3px); /* More pronounced lift */
+             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25); /* Stronger shadow */
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.6); /* Stronger border */
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.2); /* Darker hover */
+            transform: translateY(-3px);
+        }
+
+        /* Floating particles (JS generated) */
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            overflow: hidden;
+            z-index: 2; /* Below hero content */
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.6); /* Brighter */
+            border-radius: 50%;
+            animation: float-particle linear infinite;
+            pointer-events: none; /* Don't interfere with clicks */
+        }
+
+        /* Offerings Section */
+        .offerings {
+            background: var(--bg-light);
+            padding: var(--section-padding);
+        }
+
+        .section-title {
+            font-size: 3.5rem; /* Larger title */
+            margin-bottom: 1.5rem; /* More space */
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+             /* Initial state for JS animation - handled by JS */
+             /* opacity: 0; transform: translateY(30px); */
+        }
+
+        .section-subtitle {
+            font-size: 1.3rem; /* Larger subtitle */
+            color: var(--text-medium); /* Use medium color */
+            margin-bottom: 5rem; /* More space */
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+             /* Initial state for JS animation - handled by JS */
+             /* opacity: 0; transform: translateY(30px); */
+        }
+
+        .offerings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Adjusted min width */
+            gap: 3rem; /* Increased gap */
+             /* Initial state for JS animation - handled by JS, observe the grid to animate cards */
+             /* opacity: 0; transform: translateY(50px); */
+        }
+
+        .offering-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius-lg);
+            padding: 2.5rem; /* More padding */
+            box-shadow: var(--card-shadow);
+            transition: all 0.4s ease; /* Smoother transition */
+            position: relative;
+            overflow: hidden;
+             /* Initial state for JS animation - handled by JS via grid observer */
+             /* opacity: 0; transform: translateY(50px); */
+        }
+
+        /* Card hover effect */
+        .offering-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px; /* Thicker line */
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transform-origin: left; /* Scale from left */
+            transition: transform 0.4s ease; /* Smoother */
+        }
+
+        .offering-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .offering-card:hover {
+            transform: translateY(-15px); /* More lift */
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12); /* Stronger shadow */
+        }
+
+        .offering-icon {
+            font-size: 3.5rem; /* Larger icon */
+            margin-bottom: 1rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .offering-title {
+            font-size: 1.6rem; /* Larger title */
+            margin-bottom: 0.75rem; /* Less margin */
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .offering-description {
+            color: var(--text-medium); /* Use medium color */
+            margin-bottom: 2rem; /* More margin */
+            line-height: 1.8; /* Increased line height */
+        }
+
+        .offering-link {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+            display: inline-flex; /* Align icon/arrow */
+            align-items: center;
+        }
+
+        .offering-link i {
+            margin-left: 8px; /* Space for arrow */
+            transition: transform 0.3s ease;
+        }
+
+        .offering-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .offering-link:hover i {
+            transform: translateX(4px); /* Slide arrow */
+        }
+
+
+        /* Featured Insight */
+        .featured-insight {
+            background: var(--bg-dark);
+            color: white;
+            padding: var(--section-padding);
+        }
+
+        .insight-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem; /* More gap */
+            align-items: center;
+        }
+
+        .insight-text, .insight-card {
+             /* Initial state for JS animation - handled by JS */
+             /* opacity: 0; */
+             /* transform: translateX(-50px) or translateX(50px); */
+        }
+
+        .insight-text h3 {
+            font-size: 3rem; /* Larger title */
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .insight-text p {
+            font-size: 1.15rem; /* Larger text */
+            margin-bottom: 2.5rem; /* More space */
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .insight-card {
+            background: rgba(255, 255, 255, 0.08); /* Slightly darker white for contrast */
+            border-radius: var(--border-radius-md);
+            padding: 2.5rem; /* More padding */
+            backdrop-filter: blur(12px); /* More blur */
+            border: 1px solid rgba(255, 255, 255, 0.15); /* Slightly stronger border */
+            transition: all 0.4s ease; /* Smoother transition */
+        }
+
+        .insight-card:hover {
+            transform: translateY(-8px); /* More lift */
+            background: rgba(255, 255, 255, 0.12); /* Brighter hover */
+             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        .insight-meta {
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem; /* Less space */
+            font-weight: 500;
+        }
+
+        .insight-title {
+            font-size: 1.4rem; /* Larger title */
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .insight-excerpt {
+            opacity: 0.8;
+            margin-bottom: 2rem; /* More space */
+            line-height: 1.7;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--bg-dark);
+            color: rgba(255, 255, 255, 0.8); /* Softer text color */
+            padding: 4rem 2rem 1.5rem; /* Increased padding */
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem; /* Increased gap */
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            font-weight: 500;
+        }
+
+        .footer-links a {
+            color: inherit; /* Inherit softer white */
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem; /* Increased gap */
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px; /* Slightly larger target */
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+            color: var(--bg-dark); /* Darker icon on hover */
+            transform: translateY(-3px); /* More lift */
+            box-shadow: 0 5px 15px rgba(240, 147, 251, 0.3); /* Accent color shadow */
+        }
+
+        /* Animations */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+         @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+         @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) translateX(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                 opacity: 1;
+            }
+             50% {
+                 transform: translateY(50vh) translateX(10vw) rotate(180deg); /* Add some horizontal movement */
+                 opacity: 1;
+             }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(-10vw) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+             .hero h1 { font-size: 3.5rem; }
+             .hero h2 { font-size: 1.4rem; }
+             .section-title { font-size: 3rem; }
+             .section-subtitle { font-size: 1.1rem; }
+             .insight-content { gap: 3rem; }
+             .insight-text h3 { font-size: 2rem; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: flex; /* Show for JS toggle */
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+            .hero {
+                 height: auto; /* Allow hero to adjust height */
+                 padding: 100px 0 60px 0; /* Adjust padding */
+            }
+
+            .hero-content {
+                 padding: 0 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero h2 {
+                font-size: 1.2rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero p {
+                 font-size: 1rem;
+                 margin-bottom: 2rem;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 2rem; /* Adjusted gap */
+                margin-bottom: 2rem;
+            }
+
+            .stat-number {
+                 font-size: 3rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            .btn {
+                 width: 80%; /* Make buttons wider on mobile */
+                 max-width: 300px;
+                 padding: 0.8rem 1.5rem;
+            }
+
+            .section-padding {
+                 padding: 4rem 0; /* Less padding on mobile */
+            }
+
+            .section-title { font-size: 2.5rem; margin-bottom: 1rem;}
+            .section-subtitle { font-size: 1rem; margin-bottom: 3rem;}
+
+
+            .offerings-grid {
+                grid-template-columns: 1fr; /* Single column */
+                gap: 2rem; /* Adjusted gap */
+            }
+
+            .offering-card {
+                padding: 2rem;
+            }
+
+            .insight-content {
+                grid-template-columns: 1fr; /* Single column */
+                 gap: 3rem;
+            }
+
+             /* No transform/opacity reset needed here as JS will handle initial state on larger screens */
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">AI Consultant</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="my-story.html">My Story</a></li>
+                <li><a href="expertise.html">Expertise</a></li>
+                <li><a href="case-studies.html">Case Studies</a></li>
+                <li><a href="consulting-services.html">Services</a></li>
+                <li><a href="talks.html">Talks</a></li>
+                <li><a href="training.html">Training</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="particles" id="particles"></div>
+        <div class="hero-content">
+            <!-- Elements in Hero have data-animate for the *initial* load animation -->
+            <h1 data-animate="slideInUp" data-delay="0.5">Transform Your Business with AI</h1>
+            <h2 data-animate="slideInUp" data-delay="0.7">Expert Consulting & Training for Organizations</h2>
+            <p data-animate="slideInUp" data-delay="0.9">Leverage 5+ years of experience, 50+ published articles, and 70+ speaking engagements to accelerate your AI transformation journey.</p>
+
+            <!-- Stats container observed to trigger counter animations -->
+            <div class="stats" data-animate="slideInUp" data-delay="1.1">
+                <div class="stat">
+                    <!-- Stat numbers have data-counter-target -->
+                    <span class="stat-number" data-counter-target="5">0+</span>
+                    <span class="stat-label">Years Experience</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" data-counter-target="50">0+</span>
+                    <span class="stat-label">Published Articles</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number" data-counter-target="70">0+</span>
+                    <span class="stat-label">Speaking Events</span>
+                </div>
+            </div>
+
+            <div class="cta-buttons" data-animate="slideInUp" data-delay="1.3">
+                <a href="contact.html" class="btn btn-primary"><span>Let's Discuss Your AI Project</span></a>
+                <a href="consulting-services.html" class="btn btn-secondary"><span>Explore Services</span></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Offerings Section -->
+    <section class="offerings">
+        <div class="container">
+            <!-- Section titles animated on scroll -->
+            <h2 class="section-title text-center" data-animate="slideInUp">How I Can Help</h2>
+            <p class="section-subtitle text-center" data-animate="slideInUp" data-delay="0.2">Comprehensive AI solutions tailored to your business needs</p>
+
+            <!-- Offerings grid container - observed to trigger staggered card animations -->
+            <div class="offerings-grid" data-animate="slideInUp">
+                <!-- Individual cards within the grid -->
+                <div class="offering-card">
+                    <div class="offering-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3 class="offering-title">AI Consulting</h3>
+                    <p class="offering-description">Strategic guidance and technical implementation to integrate AI solutions that drive measurable business results.</p>
+                    <a href="consulting-services.html" class="offering-link">Learn More <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="offering-card">
+                    <div class="offering-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3 class="offering-title">Training Programs</h3>
+                    <p class="offering-description">Comprehensive training programs designed to upskill your team and build internal AI capabilities.</p>
+                    <a href="training.html" class="offering-link">View Programs <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <div class="offering-card">
+                    <div class="offering-icon">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    <h3 class="offering-title">Speaking & Workshops</h3>
+                    <p class="offering-description">Engaging presentations and hands-on workshops to inspire and educate your organization about AI possibilities.</p>
+                    <a href="talks.html" class="offering-link">Book a Talk <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Insight -->
+    <section class="featured-insight">
+        <div class="container">
+            <div class="insight-content">
+                <!-- Insight text block animated -->
+                <div class="insight-text" data-animate="slideInLeft">
+                    <h3>Latest Insights</h3>
+                    <p>Stay ahead of the curve with cutting-edge AI research, practical implementation strategies, and industry trends from my extensive writing and speaking experience.</p>
+                    <a href="blog.html" class="btn btn-primary"><span>Read All Articles</span></a>
+                </div>
+                <!-- Insight card animated -->
+                <div class="insight-card" data-animate="slideInRight" data-delay="0.2">
+                    <div class="insight-meta">Latest Article • 2 min read</div>
+                    <h4 class="insight-title">The Future of AI in Enterprise: 2025 Predictions</h4>
+                    <p class="insight-excerpt">Exploring the key trends and technologies that will shape how businesses leverage AI in the coming year, based on current market analysis and emerging patterns.</p>
+                    <a href="blog.html" class="offering-link">Read More <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="my-story.html">My Story</a>
+                <a href="expertise.html">Expertise</a>
+                <a href="case-studies.html">Case Studies</a>
+                <a href="consulting-services.html">Services</a>
+                <a href="training.html">Training</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin-in"></i></a> <!-- Using -in for better icon -->
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-medium-m"></i></a> <!-- Using -m -->
+            </div>
+            <p>© <span id="current-year"></span> AI Consultant. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Navbar Scroll Effect ---
+        const navbar = document.getElementById('navbar');
+        if (navbar) { // Check if navbar exists
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        }
+
+
+        // --- Floating Particles ---
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            if (!particlesContainer) return; // Exit if container not found
+
+            const particleCount = window.innerWidth > 768 ? 80 : 40;
+
+            // Clear existing particles if function is called multiple times (e.g., page reload)
+            particlesContainer.innerHTML = '';
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = Math.random() * 4 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                // Start particles below the viewport
+                particle.style.top = Math.random() * 20 + 100 + '%'; // Start between 100% and 120% from top
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                particle.style.opacity = Math.random() * 0.5 + 0.3;
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+
+        // --- Counter Animation ---
+        function animateCounter(counterElement, target) {
+            // Ensure target is a number
+            const targetNumber = parseInt(target, 10);
+            if (isNaN(targetNumber)) return;
+
+            const start = 0;
+            const duration = 2000; // milliseconds
+            let startTime = null;
+
+            function updateCounter(timestamp) {
+                if (!startTime) startTime = timestamp;
+                const progress = timestamp - startTime;
+
+                // Use a simple linear or easing function
+                const value = Math.min(targetNumber, start + (targetNumber - start) * (progress / duration));
+
+                // Add the '+' sign back
+                counterElement.textContent = Math.floor(value) + '+';
+
+                if (progress < duration) {
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    counterElement.textContent = targetNumber + '+'; // Ensure target is reached
+                }
+            }
+
+            // Trigger the animation
+            requestAnimationFrame(updateCounter);
+        }
+
+
+         // --- Intersection Observer for Scroll Animations ---
+        const elementsToAnimate = document.querySelectorAll('[data-animate]');
+
+        const scrollObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const targetElement = entry.target;
+                    const delay = targetElement.dataset.delay ? parseFloat(targetElement.dataset.delay) * 1000 : 0;
+                    const animationType = targetElement.dataset.animate || 'fadeIn'; // Default to fadeIn
+
+                    setTimeout(() => {
+                        // Apply the animation
+                        targetElement.style.animation = `${animationType} 0.8s ease-out forwards`;
+
+                        // Special handling for the stats counter animation
+                        if (targetElement.classList.contains('stats')) {
+                            targetElement.querySelectorAll('.stat-number').forEach((counterSpan, index) => {
+                                const target = counterSpan.dataset.counterTarget;
+                                if (target) {
+                                     // Stagger counter animations slightly after stats container animates
+                                    setTimeout(() => {
+                                        // Animate the number itself fading/sliding in before counting
+                                        // Ensure initial state for counter number
+                                        counterSpan.style.opacity = '0';
+                                        counterSpan.style.transform = 'translateY(20px)';
+                                        counterSpan.style.animation = `slideInUp 0.5s ease-out forwards`; // Apply animation
+
+                                        // Start counting after the fade/slide animation begins
+                                        setTimeout(() => {
+                                            animateCounter(counterSpan, target);
+                                        }, 500); // Start counting after the number itself slides in
+
+                                    }, index * 150); // Stagger delay for each counter within the stats block
+                                }
+                            });
+                        }
+
+                         // Special handling for staggered cards within the grid
+                         // We observe the grid, then animate its children
+                         if (targetElement.classList.contains('offerings-grid')) {
+                              targetElement.querySelectorAll('.offering-card').forEach((card, index) => {
+                                   // Ensure initial state for cards if observer missed it
+                                   card.style.opacity = '0';
+                                   card.style.transform = 'translateY(50px)';
+
+                                   // Apply staggered animation
+                                   setTimeout(() => {
+                                        card.style.animation = `slideInUp 0.8s ease-out forwards`;
+                                   }, index * 150); // Stagger delay
+                             });
+                         }
+
+
+                    }, delay);
+
+                    // Unobserve the element once it has intersected
+                    observer.unobserve(targetElement);
+                }
+                 // Note: We are NOT resetting the state when it goes out of view (isIntersecting = false)
+                 // This means the animation only plays once on scroll down.
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' }); // Trigger when 10% visible or 100px from bottom
+
+        // --- Apply initial hidden state and Observe elements ---
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM fully loaded and parsed'); // Debug: Check if this fires
+
+            // Create particles immediately
+            createParticles();
+
+            // Set current year in footer
+            const currentYearSpan = document.getElementById('current-year');
+            if (currentYearSpan) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+
+            // Find ALL elements that should animate on scroll (i.e., have data-animate)
+            const scrollAnimatedElements = document.querySelectorAll('[data-animate]');
+
+            scrollAnimatedElements.forEach(el => {
+                 // Check if the element is *not* within the hero section
+                 // Elements in the hero use data-animate for *initial* load animations, not scroll
+                 // However, the .stats element *is* in the hero and triggers counter animation on scroll, so exclude it from the initial hide for non-stats elements
+                if (!el.closest('.hero')) {
+                     // Set initial hidden state for elements outside the hero
+                    el.style.opacity = '0';
+                    // Apply initial transform based on intended animation type
+                    const animateType = el.dataset.animate;
+                    if (animateType === 'slideInUp' || el.classList.contains('offering-card') || el.classList.contains('offerings-grid')) el.style.transform = 'translateY(50px)';
+                    else if (animateType === 'slideInLeft' || el.classList.contains('insight-text')) el.style.transform = 'translateX(-50px)';
+                    else if (animateType === 'slideInRight' || el.classList.contains('insight-card')) el.style.transform = 'translateX(50px)';
+                    // fadeIn doesn't need an initial transform change
+
+                     // Start observing the element
+                    scrollObserver.observe(el);
+                } else {
+                    // Elements inside .hero get their initial animation from CSS/JS on page load (controlled by delay attributes)
+                    // The scrollObserver is only needed for the .stats element within the hero to trigger the *counter* animation.
+                    if (el.classList.contains('stats')) {
+                         scrollObserver.observe(el); // Observe the stats container
+                         // Initial state for counter numbers *within* stats is set just before their animation
+                         // No need to set it here for the parent container
+                    }
+                     // Hero title, subtitle, paragraph, buttons already animate on load based on data-delay
+                     // We don't need the scroll observer for them after the page loads.
+                }
+            });
+
+             // Explicitly observe Offering Cards if the grid container method is not working as expected,
+             // although observing the container is better for staggering.
+             // As per the refined JS, we are observing the grid container now. This block might not be needed.
+             // const offeringCards = document.querySelectorAll('.offering-card');
+             // offeringCards.forEach(card => {
+             //     // Ensure initial state for cards
+             //     card.style.opacity = '0';
+             //     card.style.transform = 'translateY(50px)';
+             //     // Observe individual cards if container observing fails
+             //     // scrollObserver.observe(card); // Use this line if observing grid container doesn't trigger card animations
+             // });
+             // Let's stick to observing the grid container as it's cleaner for staggering.
+             // Make sure the .offerings-grid DIV has data-animate="slideInUp" attribute. (It does in the HTML above)
+
+        });
+
+
+        // --- Mobile menu toggle ---
+        const navToggle = document.querySelector('.nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (navToggle && navLinks) { // Check if elements exist
+            navToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                navToggle.classList.toggle('active'); // Toggle class on toggle icon for animation
+                // Optional: Prevent body scroll when menu is open
+                 // document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+            });
+
+             // Close menu when a link is clicked (mobile)
+             navLinks.querySelectorAll('a').forEach(link => {
+                 link.addEventListener('click', () => {
+                     if (navLinks.classList.contains('active')) {
+                         navLinks.classList.remove('active');
+                         navToggle.classList.remove('active');
+                         // Optional: Restore body scroll
+                         // document.body.style.overflow = '';
+                     }
+                 });
+             });
+        }
+
+
+        // --- Smooth scrolling for anchor links ---
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                // Close mobile menu if open
+                 if (navLinks && navLinks.classList.contains('active')) {
+                     navLinks.classList.remove('active');
+                     navToggle.classList.remove('active');
+                     // Optional: Restore body scroll
+                     // document.body.style.overflow = '';
+                 }
+
+                const targetId = this.getAttribute('href');
+                // Handle case where href is just "#"
+                 if (targetId === '#') {
+                     window.scrollTo({
+                         top: 0,
+                         behavior: "smooth"
+                     });
+                     return;
+                 }
+
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    const offset = navbar ? navbar.offsetHeight : 0; // Get navbar height, default to 0 if not found
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

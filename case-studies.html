@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Case Studies - AI Engineer</title> <!-- Updated Title -->
+    <!-- Use a modern font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Basic Reset & Variables (Consistent across pages) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #f093fb;
+            --text-dark: #1f2937; /* Slightly darker for more contrast */
+            --text-medium: #4b5563; /* New: for descriptions */
+            --text-light: #9ca3af; /* Slightly adjusted */
+            --bg-dark: #111827; /* Darker */
+            --bg-light: #f3f4f6; /* Lighter */
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --card-bg: #ffffff;
+            --card-shadow: 0 12px 40px rgba(0, 0, 0, 0.08); /* Softer shadow */
+            --border-radius-lg: 20px;
+            --border-radius-md: 15px;
+            --border-radius-sm: 8px;
+            --navbar-height: 60px; /* Approximate height */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif; /* Use the new font */
+            line-height: 1.7; /* Slightly increased line height */
+            color: var(--text-dark);
+            background: var(--bg-light); /* Default background */
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem; /* Consistent horizontal padding */
+        }
+
+        .section-padding {
+            padding: 8rem 0; /* More vertical padding */
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* Navigation (Consistent across pages) */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: background 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+             min-height: var(--navbar-height);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out, visibility 0.4s;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-medium);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+            justify-content: space-between;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background: var(--text-dark);
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+            transform-origin: left center;
+        }
+
+        /* Mobile Menu Active State (Consistent across pages) */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: var(--navbar-height); /* Below navbar */
+                left: 0;
+                width: 100%;
+                height: calc(100vh - var(--navbar-height)); /* Full height below navbar */
+                background: var(--card-bg);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                transform: translateX(-100%);
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+                opacity: 1;
+                visibility: visible;
+                overflow-y: auto;
+            }
+
+            .nav-links li {
+                 width: 100%;
+                 text-align: center;
+                 padding: 1rem 0;
+                 border-bottom: 1px solid var(--bg-light);
+            }
+
+             .nav-links li:last-child {
+                 border-bottom: none;
+             }
+
+            .nav-links a {
+                font-size: 1.2rem;
+                color: var(--text-dark);
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+             /* Animate toggle icon */
+            .nav-toggle.active span:nth-child(1) { transform: rotate(45deg); }
+            .nav-toggle.active span:nth-child(2) { opacity: 0; }
+            .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg); }
+        }
+
+        /* Hero Section (Adapted for Case Studies) */
+        .hero {
+            padding: calc(var(--navbar-height) + 4rem) 2rem 4rem; /* Add navbar height offset */
+            background: var(--gradient-1); /* Consistent gradient */
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden; /* Needed for particle effect if added */
+        }
+
+        /* Hero background effect (Using radial gradient like index.html) */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 60%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 900px; /* Slightly wider */
+            margin: 0 auto;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem; /* Larger title */
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+             /* Initial state for JS animation */
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            font-weight: 400; /* Lighter weight */
+            max-width: 700px;
+            margin: 0 auto; /* Center paragraph */
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+         /* Particles (Optional, add if desired) */
+         /* .particles { ... } */
+         /* .particle { ... } */
+
+
+        /* Main Content */
+        .main-content {
+            padding: var(--section-padding);
+            background: var(--bg-light); /* Use light background */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+         .section { /* Generic section styling for content blocks */
+            margin-bottom: 6rem;
+            /* Initial state for JS animation */
+            opacity: 0;
+            transform: translateY(50px);
+         }
+
+        .section-title {
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+            position: relative;
+            display: inline-block;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+        .section-title::after {
+             content: '';
+             position: absolute;
+             bottom: -8px;
+             left: 0;
+             width: 80px;
+             height: 5px;
+             background: var(--gradient-1);
+              border-radius: 3px;
+        }
+
+        .section-content {
+             font-size: 1.15rem;
+             line-height: 1.8;
+             color: var(--text-medium);
+             max-width: 900px; /* Limit width for readability */
+             margin: 0 auto; /* Center content */
+        }
+
+         .highlight { /* Consistent styling */
+            background: linear-gradient(120deg, rgba(102, 126, 234, 0.15) 0%, rgba(240, 147, 251, 0.15) 100%);
+            padding: 0.2rem 0.5rem;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+
+         .case-studies-grid { /* Grid for case study cards */
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+             gap: 2.5rem;
+             margin-top: 3rem;
+              /* Observe grid for staggered card animation */
+         }
+
+         .case-study-card { /* Style for case study cards */
+             background: var(--card-bg);
+             border-radius: var(--border-radius-md);
+             padding: 2rem;
+             box-shadow: var(--card-shadow);
+             border: 1px solid rgba(102, 126, 234, 0.1);
+             transition: all 0.3s ease;
+             display: flex;
+             flex-direction: column;
+             text-decoration: none;
+             color: inherit;
+              /* Initial state for JS animation */
+             opacity: 0;
+             transform: translateY(30px);
+         }
+          .case-study-card:hover {
+              transform: translateY(-8px);
+              box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12);
+          }
+
+         .case-study-icon {
+             font-size: 2.5rem; /* Slightly smaller icons */
+             margin-bottom: 1rem;
+             background: var(--gradient-1);
+             -webkit-background-clip: text;
+             -webkit-text-fill-color: transparent;
+             background-clip: text;
+         }
+
+         .case-study-title {
+             font-size: 1.5rem;
+             font-weight: 600;
+             color: var(--text-dark);
+             margin-bottom: 0.75rem;
+             line-height: 1.4;
+              flex-grow: 1; /* Allows title to push link down */
+         }
+
+         .case-study-description {
+            color: var(--text-medium);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+         }
+
+         .case-study-links {
+             margin-top: auto; /* Push links to the bottom */
+             padding-top: 1rem; /* Space above links */
+             border-top: 1px dashed rgba(0,0,0,0.1); /* Separator above links */
+             display: flex;
+             flex-wrap: wrap;
+             gap: 0.75rem;
+         }
+
+         .case-study-link {
+             display: inline-flex;
+             align-items: center;
+             font-size: 0.95rem;
+             color: var(--primary-color);
+             text-decoration: none;
+             font-weight: 500;
+             transition: color 0.3s ease, transform 0.3s ease;
+         }
+          .case-study-link i { margin-right: 5px; transition: transform 0.3s ease; color: inherit;} /* Inherit color */
+          .case-study-link:hover { color: var(--secondary-color);}
+          .case-study-link:hover i { transform: translateX(4px);}
+
+
+         /* Open Source Section */
+         .open-source-section {
+             margin-bottom: 6rem;
+         }
+          .open-source-section h2 { /* Use section title style */
+             font-size: 2.8rem;
+             margin-bottom: 3rem;
+             color: var(--text-dark);
+             position: relative;
+             display: inline-block;
+             font-weight: 700;
+             letter-spacing: -0.5px;
+              /* Initial state for JS animation */
+             opacity: 0;
+             transform: translateY(50px);
+          }
+         .open-source-section h2::after {
+              content: ''; position: absolute; bottom: -8px; left: 0; width: 80px; height: 5px; background: var(--gradient-1); border-radius: 3px;
+         }
+          .open-source-section .section-content {
+             max-width: 900px;
+             margin: 0 auto;
+             text-align: center; /* Center the text */
+             font-size: 1.15rem;
+             line-height: 1.8;
+             color: var(--text-medium);
+          }
+           .open-source-section .section-content a {
+               color: var(--primary-color);
+               text-decoration: none;
+               font-weight: 500;
+               transition: color 0.3s ease;
+                border-bottom: 1px dotted var(--primary-color);
+           }
+            .open-source-section .section-content a:hover {
+                color: var(--secondary-color);
+                 border-bottom-color: var(--secondary-color);
+            }
+
+
+         /* CTA Section (Consistent) */
+         .cta-section {
+             background: var(--bg-dark);
+             color: white;
+             padding: 5rem 3rem;
+             margin-top: 6rem;
+             border-radius: var(--border-radius-lg);
+             text-align: center;
+              /* Initial state for JS animation */
+             opacity: 0;
+             transform: translateY(50px);
+         }
+
+         .cta-section h3 {
+             font-size: 2.5rem;
+             margin-bottom: 1.5rem;
+             font-weight: 700;
+         }
+
+         .cta-section p {
+             font-size: 1.15rem;
+             margin-bottom: 2.5rem;
+             opacity: 0.9;
+             line-height: 1.8;
+              max-width: 800px;
+              margin-left: auto;
+              margin-right: auto;
+         }
+
+
+        /* Button Styling (Consistent across pages) */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--gradient-2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+             position: relative;
+             overflow: hidden;
+             z-index: 1;
+             text-align: center;
+        }
+
+         .btn span { position: relative; z-index: 1; }
+
+         .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease;
+            z-index: 0;
+        }
+
+         .btn:hover::before { width: 300px; height: 300px; }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+        }
+
+
+        /* Footer (Consistent across pages) */
+        footer {
+            background: var(--bg-dark);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 4rem 2rem 1.5rem;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            font-weight: 500;
+        }
+
+        .footer-links a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+            color: var(--bg-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(240, 147, 251, 0.3);
+        }
+
+        /* Animations */
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+         /* Particles keyframe (keep for consistency) */
+        @keyframes float-particle {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+             50% { transform: translateY(50vh) translateX(10vw) rotate(180deg); opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(-10vw) rotate(360deg); opacity: 0; }
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+             .hero h1 { font-size: 3rem; }
+             .hero p { font-size: 1.1rem; }
+             .section-title { font-size: 2.2rem; margin-bottom: 2.5rem; }
+             .section-title::after { width: 60px; height: 4px; }
+             .section-content { font-size: 1.1rem; }
+             .case-studies-grid { gap: 2rem; }
+             .case-study-card { padding: 1.5rem; }
+             .case-study-icon { font-size: 2rem; }
+             .case-study-title { font-size: 1.3rem; }
+             .case-study-description { font-size: 1rem; margin-bottom: 1rem;}
+             .case-study-links { gap: 0.5rem; padding-top: 0.8rem; }
+             .case-study-link { font-size: 0.9rem;}
+
+             .open-source-section h2 { font-size: 2.2rem; margin-bottom: 2.5rem; }
+             .open-source-section h2::after { width: 60px; height: 4px; }
+              .open-source-section .section-content { font-size: 1.1rem;}
+
+
+             .cta-section h3 { font-size: 2rem;}
+             .cta-section p { font-size: 1.1rem;}
+        }
+
+
+        @media (max-width: 768px) {
+             /* Navigation mobile styles handled above */
+
+            .hero { padding: calc(var(--navbar-height) + 2rem) 1rem 3rem; }
+            .hero h1 { font-size: 2.5rem; }
+             .hero p { font-size: 1rem; }
+
+            .section-padding { padding: 4rem 0; } /* Less padding */
+
+            .section {
+                margin-bottom: 4rem;
+                 transform: translateY(0) !important; /* Disable animation on mobile */
+                 opacity: 1 !important; /* Disable animation on mobile */
+            }
+
+            .section-title { font-size: 1.8rem; margin-bottom: 2rem; text-align: center; width: 100%;}
+             .section-title::after { left: 50%; transform: translateX(-50%); width: 50px; height: 3px;}
+
+            .section-content { font-size: 1rem; line-height: 1.7; padding: 0 1rem;}
+
+             .case-studies-grid {
+                 grid-template-columns: 1fr; /* Single column */
+                 gap: 1.5rem; /* Less gap */
+                 padding: 0 1rem; /* Add padding */
+             }
+
+             .case-study-card {
+                 padding: 1.5rem;
+                 transform: translateY(0) !important; /* Disable animation on mobile */
+                 opacity: 1 !important; /* Disable animation on mobile */
+             }
+             .case-study-icon { font-size: 2rem; margin-bottom: 0.8rem;}
+             .case-study-title { font-size: 1.2rem; margin-bottom: 0.8rem;}
+             .case-study-description { font-size: 0.95rem; margin-bottom: 1rem;}
+             .case-study-links { gap: 0.5rem; padding-top: 0.8rem;}
+             .case-study-link { font-size: 0.9rem;}
+
+
+             .open-source-section { margin-bottom: 4rem;}
+              .open-source-section h2 { font-size: 1.8rem; margin-bottom: 2rem; text-align: center; width: 100%;}
+             .open-source-section h2::after { left: 50%; transform: translateX(-50%); width: 50px; height: 3px;}
+             .open-source-section .section-content { font-size: 1rem; padding: 0 1rem;}
+
+
+             .cta-section {
+                 padding: 3rem 1.5rem;
+                 margin-top: 4rem;
+                 transform: translateY(0) !important; /* Disable animation on mobile */
+                 opacity: 1 !important; /* Disable animation on mobile */
+                 margin-left: 1rem;
+                 margin-right: 1rem;
+             }
+             .cta-section h3 { font-size: 1.8rem; margin-bottom: 1rem;}
+             .cta-section p { font-size: 1rem; margin-bottom: 1.5rem;}
+
+            .btn { width: 80%; max-width: 300px; padding: 0.8rem 1.5rem;}
+
+            /* Footer mobile styles handled above */
+            .footer-links { gap: 1rem; }
+             .social-links { gap: 1rem; }
+        }
+
+         /* Ensure animations are off by default on mobile, enabled by JS if > 768px */
+         @media (max-width: 768px) {
+             /* Elements targeted by JS animation on desktop */
+             .section, /* Includes section-title, section-content */
+             .case-studies-grid, /* Grid container */
+             .case-study-card, /* Cards within grid */
+             .open-source-section,
+             .cta-section {
+                 opacity: 1 !important;
+                 transform: none !important;
+                 animation: none !important;
+             }
+         }
+
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">AI Engineer</div> <!-- Consistent Logo text -->
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="my-story-engineer.html">My Story</a></li> <!-- Assuming Engineer version -->
+                <li><a href="expertise.html">Expertise</a></li>
+                <li><a href="case-studies.html" class="active">Case Studies</a></li> <!-- Set active -->
+                <li><a href="consulting-services.html">Services</a></li>
+                <li><a href="talks.html">Talks</a></li>
+                <li><a href="training.html">Training Programs</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+             <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Adapted for Case Studies) -->
+    <section class="hero">
+        <!-- Optional: Add particles div here for consistency if needed -->
+        <!-- <div class="particles" id="particles"></div> -->
+        <div class="hero-content">
+            <!-- Elements in Hero have data-animate for initial load animation -->
+            <h1 data-animate="slideInUp" data-delay="0.3">Real-World AI Engineering Case Studies</h1> <!-- Updated Title -->
+            <p data-animate="slideInUp" data-delay="0.5">Demonstrating practical problem-solving and technical results with AI.</p> <!-- Updated Subtitle -->
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="main-content">
+        <div class="container">
+
+            <!-- Introduction Section -->
+            <div class="section" data-animate="slideInUp">
+                <h2 class="section-title">Engineering Impact</h2>
+                <div class="section-content">
+                    <p>These case studies highlight how I've applied AI engineering expertise to solve specific business challenges, focusing on the technical approach, implementation details, and the tangible outcomes delivered. Each project represents a successful effort to build and deploy intelligent systems in real-world scenarios.</p>
+                </div>
+            </div>
+
+            <!-- Case Studies Grid -->
+            <div class="case-studies-grid" data-animate="slideInUp" data-delay="0.2"> <!-- Observe grid for staggered card animation -->
+
+                <!-- Example Case Study Card 1: LLM -->
+                <a href="case-study-1.html" class="case-study-card"> <!-- Link to hypothetical full case study page -->
+                     <div class="case-study-icon"><i class="fas fa-comment-dots"></i></div> <!-- LLM icon -->
+                    <h3 class="case-study-title">Enterprise Q&A System using Fine-tuned LLM</h3>
+                    <p class="case-study-description">Developed and deployed a custom Q&A chatbot by fine-tuning a Large Language Model on internal documentation, significantly reducing support response times.</p>
+                    <div class="case-study-links">
+                         <span class="case-study-link">LLMs, NLP, Deployment</span> <!-- Example tags/technologies -->
+                         <span class="case-study-link">Manufacturing Industry</span> <!-- Example industry -->
+                         <span class="case-study-link">Read Full Case Study <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <!-- Example Case Study Card 2: OCR -->
+                 <a href="case-study-2.html" class="case-study-card">
+                     <div class="case-study-icon"><i class="fas fa-file-image"></i></div> <!-- OCR icon -->
+                    <h3 class="case-study-title">Automated Invoice Processing with OCR & NLP</h3>
+                    <p class="case-study-description">Engineered a pipeline combining Optical Character Recognition and Natural Language Processing to extract structured data from scanned invoices, automating financial data entry.</p>
+                    <div class="case-study-links">
+                         <span class="case-study-link">OCR, NLP, Automation</span>
+                          <span class="case-study-link">Finance Industry</span>
+                         <span class="case-study-link">Read Full Case Study <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                <!-- Example Case Study Card 3: Recommendation System -->
+                 <a href="case-study-3.html" class="case-study-card">
+                     <div class="case-study-icon"><i class="fas fa-thumbs-up"></i></div> <!-- Recommendation icon -->
+                    <h3 class="case-study-title">Personalized Product Recommendations Engine</h3>
+                    <p class="case-study-description">Designed and implemented a scalable recommendation system using collaborative filtering and deep learning techniques to increase e-commerce conversion rates.</p>
+                    <div class="case-study-links">
+                         <span class="case-study-link">Machine Learning, Recommenders</span>
+                          <span class="case-study-link">E-commerce</span>
+                         <span class="case-study-link">Read Full Case Study <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                 <!-- Example Case Study Card 4: STT -->
+                 <a href="case-study-4.html" class="case-study-card">
+                     <div class="case-study-icon"><i class="fas fa-microphone-alt"></i></div> <!-- STT icon -->
+                    <h3 class="case-study-title">Speech-to-Text System for Call Center Analytics</h3>
+                    <p class="case-study-description">Developed a robust STT pipeline to transcribe call recordings, enabling sentiment analysis and topic extraction for improved call center performance insights.</p>
+                    <div class="case-study-links">
+                         <span class="case-study-link">STT, NLP, Data Analytics</span>
+                          <span class="case-study-link">Customer Service</span>
+                         <span class="case-study-link">Read Full Case Study <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                 <!-- Example Case Study Card 5: TTS -->
+                 <a href="case-study-5.html" class="case-study-card">
+                     <div class="case-study-icon"><i class="fas fa-volume-up"></i></div> <!-- TTS icon -->
+                    <h3 class="case-study-title">Text-to-Speech Integration for Accessibility App</h3>
+                    <p class="case-study-description">Integrated and customized a Text-to-Speech solution to provide natural-sounding audio output for a mobile accessibility application, enhancing user experience.</p>
+                    <div class="case-study-links">
+                         <span class="case-study-link">TTS, Audio Processing</span>
+                          <span class="case-study-link">Accessibility Tech</span>
+                         <span class="case-study-link">Read Full Case Study <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                 <!-- Example Case Study Card 6: LLM (another application) -->
+                 <a href="case-study-6.html" class="case-study-card">
+                     <div class="case-study-icon"><i class="fas fa-robot"></i></div> <!-- General AI/Robot icon -->
+                    <h3 class="case-study-title">LLM-Powered Code Generation Assistant</h3>
+                    <p class="case-study-description">Built an internal tool leveraging an LLM to assist engineers with code snippet generation and debugging, boosting developer productivity.</p>
+                    <div class="case-study-links">
+                         <span class="case-study-link">LLMs, Software Engineering</span>
+                          <span class="case-study-link">Internal Tools</span>
+                         <span class="case-study-link">Read Full Case Study <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                 <!-- Example Case Study Card 7: Computer Vision (CV) -->
+                 <a href="case-study-7.html" class="case-study-card">
+                     <div class="case-study-icon"><i class="fas fa-camera-retro"></i></div> <!-- Camera icon -->
+                    <h3 class="case-study-title">Real-Time Object Detection for Quality Control</h3>
+                    <p class="case-study-description">Implemented a Computer Vision system for real-time detection of defects on a manufacturing assembly line, improving product quality control.</p>
+                    <div class="case-study-links">
+                         <span class="case-study-link">Computer Vision, Manufacturing</span>
+                          <span class="case-study-link">Industrial Automation</span>
+                         <span class="case-study-link">Read Full Case Study <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                 <!-- Example Case Study Card 8: Recommendation System (another application) -->
+                 <a href="case-study-8.html" class="case-study-card">
+                     <div class="case-study-icon"><i class="fas fa-film"></i></div> <!-- Entertainment icon -->
+                    <h3 class="case-study-title">Content Recommendation for Streaming Platform</h3>
+                    <p class="case-study-description">Developed a sophisticated recommendation engine to personalize content suggestions for users of a streaming service, increasing engagement.</p>
+                    <div class="case-study-links">
+                         <span class="case-study-link">Machine Learning, Entertainment</span>
+                          <span class="case-study-link">Media & Streaming</span>
+                         <span class="case-study-link">Read Full Case Study <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                 <!-- Example Case Study Card 9: Combining Technologies -->
+                 <a href="case-study-9.html" class="case-study-card">
+                     <div class="case-study-icon"><i class="fas fa-comments"></i></div> <!-- Chat icon -->
+                    <h3 class="case-study-title">AI-Driven Customer Sentiment Analysis Pipeline</h3>
+                    <p class="case-study-description">Built a system combining STT (for voice calls), NLP (for text/sentiment), and data analytics to provide real-time insights into customer feedback channels.</p>
+                    <div class="case-study-links">
+                         <span class="case-study-link">STT, NLP, Data Analytics</span>
+                          <span class="case-study-link">Market Research</span>
+                         <span class="case-study-link">Read Full Case Study <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+                 <!-- Example Case Study Card 10: MLOps Focus -->
+                 <a href="case-study-10.html" class="case-study-card">
+                     <div class="case-study-icon"><i class="fas fa-rocket"></i></div> <!-- Deployment icon -->
+                    <h3 class="case-study-title">Implementing Robust MLOps for Financial Models</h3>
+                    <p class="case-study-description">Designed and built automated CI/CD pipelines, monitoring, and retraining loops for mission-critical credit scoring models, ensuring reliability and performance.</p>
+                    <div class="case-study-links">
+                         <span class="case-study-link">MLOps, Machine Learning</span>
+                          <span class="case-study-link">Finance Industry</span>
+                         <span class="case-study-link">Read Full Case Study <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                </a>
+
+
+            </div>
+
+            <!-- Open Source Section -->
+            <div class="open-source-section" data-animate="slideInUp" data-delay="0.4">
+                <h2>Open Source Contributions</h2>
+                <div class="section-content">
+                    <p>Beyond client work, I actively contribute to the open-source AI community. My GitHub profile hosts <span class="highlight">90+ projects</span>, ranging from experimental models and technical demos to utility libraries. These projects showcase my continuous learning and dedication to practical coding and sharing knowledge.</p>
+                    <p>Explore my repositories to see examples of my work and technical interests:</p>
+                    <p><a href="[Link to your GitHub Profile]" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i> Visit my GitHub Profile →</a></p> <!-- Link to GitHub -->
+                </div>
+            </div>
+
+
+            <!-- CTA Section -->
+            <div class="cta-section" data-animate="slideInUp" data-delay="0.6">
+                <h3>Have a Project Requiring AI Engineering Expertise?</h3>
+                <p>If you're facing a technical challenge that AI can solve, or need an experienced engineer to build and deploy intelligent systems, let's discuss how my skills can contribute to your success.</p>
+                <a href="contact.html" class="btn"><span>Let's Talk About Your Project</span></a> <!-- Updated Button Text -->
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Footer (Consistent across pages) -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="my-story-engineer.html">My Story</a> <!-- Assuming Engineer version -->
+                <a href="expertise.html">Expertise</a>
+                <a href="case-studies.html">Case Studies</a>
+                <a href="consulting-services.html">Services</a>
+                <a href="talks.html">Talks</a>
+                <a href="training.html">Training Programs</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-medium-m"></i></a>
+            </div>
+            <p>© <span id="current-year"></span> AI Engineer. All rights reserved.</p> <!-- Consistent Copyright -->
+        </div>
+    </footer>
+
+    <script>
+        // --- Navbar Scroll Effect ---
+        const navbar = document.getElementById('navbar');
+        if (navbar) {
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // --- Floating Particles (Optional for this page) ---
+        // Uncomment and ensure particles div exists in HTML if you want them here
+        /*
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            if (!particlesContainer) return;
+
+            const particleCount = window.innerWidth > 768 ? 80 : 40;
+            particlesContainer.innerHTML = '';
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = Math.random() * 4 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 20 + 100 + '%'; // Start below viewport
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                particle.style.opacity = Math.random() * 0.5 + 0.3;
+                particlesContainer.appendChild(particle);
+            }
+        }
+        */
+
+        // --- Intersection Observer for Scroll Animations ---
+        const scrollAnimatedElements = document.querySelectorAll('[data-animate]');
+
+        const scrollObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const targetElement = entry.target;
+                    const delay = targetElement.dataset.delay ? parseFloat(targetElement.dataset.delay) * 1000 : 0;
+                    const animationType = targetElement.dataset.animate || 'slideInUp'; // Default to slideInUp
+
+                    setTimeout(() => {
+                        // Apply the animation
+                        targetElement.style.animation = `${animationType} 0.8s ease-out forwards`;
+
+                        // Special handling for case studies grid to trigger card animations
+                        if (targetElement.classList.contains('case-studies-grid')) {
+                             targetElement.querySelectorAll('.case-study-card').forEach((card, index) => {
+                                 card.style.opacity = '0'; // Ensure initial state
+                                 card.style.transform = 'translateY(30px)';
+                                 setTimeout(() => {
+                                     card.style.animation = `slideInUp 0.8s ease-out forwards`;
+                                 }, index * 100); // Stagger delay
+                             });
+                              // Unobserve the grid itself after triggering children animation
+                             observer.unobserve(targetElement);
+                        }
+                        // No counters on this page
+
+                         // Unobserve the element itself IF it's not a container triggering children
+                         // and if it's not the case studies grid container
+                         if (!targetElement.classList.contains('case-studies-grid')) {
+                              observer.unobserve(targetElement);
+                         }
+
+
+                    }, delay);
+
+
+                }
+                 /* No action needed when element is not intersecting */
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' }); // Trigger when 10% visible or 100px from bottom
+
+
+        // --- Apply initial hidden state and Trigger load animations ---
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Case Studies DOM fully loaded and parsed');
+
+            // Optional: Create particles if div exists
+            // createParticles();
+
+            // Set current year in footer
+            const currentYearSpan = document.getElementById('current-year');
+            if (currentYearSpan) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+
+            // Find ALL elements that should animate on scroll (i.e., have data-animate)
+            const scrollAnimatedElements = document.querySelectorAll('[data-animate]');
+
+            scrollAnimatedElements.forEach(el => {
+                 // Elements in the hero get their initial animation from data-delay attributes in HTML/CSS
+                 // We only apply initial hidden state and observe elements *outside* the hero
+                 if (!el.closest('.hero')) {
+                     // Set initial hidden state
+                     el.style.opacity = '0';
+                    // Apply initial transform based on intended animation type
+                    const animateType = el.dataset.animate;
+                    if (animateType === 'slideInUp') el.style.transform = 'translateY(50px)';
+                    else if (animateType === 'slideInLeft') el.style.transform = 'translateX(-50px)';
+                    else if (animateType === 'slideInRight') el.style.transform = 'translateX(50px)';
+                    // fadeIn doesn't need initial transform
+
+                      // Start observing the element, UNLESS it's the case studies grid which will be observed below
+                     if (!el.classList.contains('case-studies-grid')) {
+                          scrollObserver.observe(el);
+                     }
+
+
+                     // Special case: case study cards need their initial state set,
+                     // even though they are animated when their parent grid is observed.
+                     // This ensures they are hidden before the grid comes into view.
+                     if (el.classList.contains('case-study-card')) {
+                         el.style.opacity = '0';
+                         el.style.transform = 'translateY(30px)'; // Cards have a slightly shorter initial move
+                     }
+
+                 }
+                 // Hero elements are not observed by scrollObserver on this page as their animation is on load.
+            });
+
+             // Explicitly observe the case studies grid to trigger the staggered card animations
+             const caseStudiesGrid = document.querySelector('.case-studies-grid');
+             if (caseStudiesGrid) {
+                  scrollObserver.observe(caseStudiesGrid);
+             }
+
+
+        });
+
+
+        // --- Mobile menu toggle ---
+        const navToggle = document.querySelector('.nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (navToggle && navLinks) { // Check if elements exist
+            navToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                navToggle.classList.toggle('active'); // Toggle class on toggle icon for animation
+                // Optional: Prevent body scroll when menu is open
+                 // document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+            });
+
+             // Close menu when a link is clicked (mobile)
+             navLinks.querySelectorAll('a').forEach(link => {
+                 link.addEventListener('click', () => {
+                     if (navLinks.classList.contains('active')) {
+                         navLinks.classList.remove('active');
+                         navToggle.classList.remove('active');
+                         // Optional: Restore body scroll
+                         // document.body.style.overflow = '';
+                     }
+                 });
+             });
+        }
+
+
+        // --- Smooth scrolling for anchor links ---
+         // This page has no internal anchor links (#...).
+         // Keeping the function for completeness and future use.
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                 if (this.getAttribute('href').length > 1) {
+                     e.preventDefault();
+                 } else {
+                     return; // If href is just "#", let it scroll to top
+                 }
+
+                // Close mobile menu if open
+                 if (navLinks && navLinks.classList.contains('active')) {
+                     navLinks.classList.remove('active');
+                     navToggle.classList.remove('active');
+                 }
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    const offset = navbar ? navbar.offsetHeight : 0;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>

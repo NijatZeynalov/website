@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consulting Services - AI Consultant & Trainer</title>
+    <!-- Use a modern font from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Basic Reset & Variables (Consistent across pages) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --accent-color: #f093fb;
+            --text-dark: #1f2937; /* Slightly darker for more contrast */
+            --text-medium: #4b5563; /* New: for descriptions */
+            --text-light: #9ca3af; /* Slightly adjusted */
+            --bg-dark: #111827; /* Darker */
+            --bg-light: #f3f4f6; /* Lighter */
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --card-bg: #ffffff;
+            --card-shadow: 0 12px 40px rgba(0, 0, 0, 0.08); /* Softer shadow */
+            --border-radius-lg: 20px;
+            --border-radius-md: 15px;
+            --border-radius-sm: 8px;
+            --navbar-height: 60px; /* Approximate height */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif; /* Use the new font */
+            line-height: 1.7; /* Slightly increased line height */
+            color: var(--text-dark);
+            background: var(--bg-light); /* Default background */
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem; /* Consistent horizontal padding */
+        }
+
+        .section-padding {
+            padding: 8rem 0; /* More vertical padding */
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* General Section Title Style (Consistent) */
+        .section-title {
+             font-size: 3rem;
+             margin-bottom: 1.5rem;
+             background: var(--gradient-1);
+             -webkit-background-clip: text;
+             -webkit-text-fill-color: transparent;
+             background-clip: text;
+             font-weight: 700;
+             letter-spacing: -0.5px;
+             /* Initial state for JS animation */
+             opacity: 0;
+             transform: translateY(50px);
+        }
+
+
+        /* Navigation (Consistent across pages) */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            transition: background 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+             min-height: var(--navbar-height);
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+            transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out, visibility 0.4s;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-medium);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-bottom: 5px;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-1);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after,
+        .nav-links a.active::after {
+            width: 100%;
+        }
+
+        .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            width: 30px;
+            height: 20px;
+            justify-content: space-between;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background: var(--text-dark);
+            border-radius: 2px;
+            transition: all 0.3s ease-in-out;
+            transform-origin: left center;
+        }
+
+        /* Mobile Menu Active State (Consistent across pages) */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: var(--navbar-height);
+                left: 0;
+                width: 100%;
+                height: calc(100vh - var(--navbar-height));
+                background: var(--card-bg);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                transform: translateX(-100%);
+                opacity: 0;
+                visibility: hidden;
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+                opacity: 1;
+                visibility: visible;
+                overflow-y: auto;
+            }
+
+            .nav-links li {
+                 width: 100%;
+                 text-align: center;
+                 padding: 1rem 0;
+                 border-bottom: 1px solid var(--bg-light);
+            }
+
+             .nav-links li:last-child {
+                 border-bottom: none;
+             }
+
+            .nav-links a {
+                font-size: 1.2rem;
+                color: var(--text-dark);
+            }
+
+            .nav-toggle {
+                display: flex;
+            }
+
+             /* Animate toggle icon */
+            .nav-toggle.active span:nth-child(1) { transform: rotate(45deg); }
+            .nav-toggle.active span:nth-child(2) { opacity: 0; }
+            .nav-toggle.active span:nth-child(3) { transform: rotate(-45deg); }
+        }
+
+        /* Hero Section (Adapted) */
+        .hero {
+            padding: calc(var(--navbar-height) + 4rem) 2rem 4rem; /* Add navbar height offset */
+            background: var(--gradient-1); /* Consistent gradient */
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden; /* Needed for particle effect if added */
+        }
+
+        /* Hero background effect (Using radial gradient like index.html) */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 60%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 900px; /* Slightly wider */
+            margin: 0 auto;
+            z-index: 2;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 4rem; /* Larger title */
+            margin-bottom: 1rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+             /* Initial state for JS animation */
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            font-weight: 400; /* Lighter weight */
+            max-width: 700px;
+            margin: 0 auto; /* Center paragraph */
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+         /* Particles (Optional, add if desired) */
+         /* .particles { ... } */
+         /* .particle { ... } */
+
+
+        /* Main Content */
+        .main-content {
+            padding: var(--section-padding);
+            background: var(--bg-light); /* Use light background */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-intro {
+            max-width: 900px;
+            margin: 0 auto 6rem; /* Center and add spacing */
+            text-align: center;
+             /* Initial state for JS animation */
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .service-intro p {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            color: var(--text-medium);
+        }
+
+        .service-section {
+            margin-bottom: 6rem; /* Space between sections */
+        }
+
+        .service-section .section-title {
+             text-align: center;
+             margin-bottom: 4rem;
+        }
+
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Cards adapt better */
+            gap: 2.5rem; /* Space between cards */
+             /* Observe grid for staggered card animation */
+        }
+
+        .service-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius-md);
+            padding: 2rem; /* Padding inside card */
+            box-shadow: var(--card-shadow);
+            border: 1px solid rgba(102, 126, 234, 0.1);
+            transition: all 0.3s ease;
+            display: flex; /* Use flex for layout within card */
+            flex-direction: column;
+             /* Initial state for JS animation */
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px); /* Lift effect on hover */
+            box-shadow: 0 18px 45px rgba(0, 0, 0, 0.12); /* Stronger shadow on hover */
+        }
+
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .service-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 0.75rem;
+        }
+
+        .service-description {
+            color: var(--text-medium);
+            line-height: 1.7;
+            margin-bottom: 1.5rem; /* Space before links */
+            flex-grow: 1; /* Make description take available space */
+        }
+
+        .service-links {
+            margin-top: auto; /* Push links to the bottom */
+            display: flex;
+            flex-wrap: wrap; /* Wrap links if many */
+            gap: 0.75rem; /* Space between links */
+            padding-top: 1rem; /* Space above links */
+            border-top: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .service-link {
+            display: inline-flex; /* Align icon and text */
+            align-items: center;
+            font-size: 0.95rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+
+        .service-link i {
+            margin-right: 5px; /* Space for icon */
+            color: var(--primary-color);
+             transition: color 0.3s ease;
+        }
+
+        .service-link:hover {
+            color: var(--secondary-color);
+             transform: translateX(4px); /* Subtle slide on hover */
+        }
+
+         .service-link:hover i {
+             color: var(--secondary-color);
+         }
+
+
+        /* Who I Help Section */
+         .who-i-help-section {
+             background: var(--bg-dark); /* Dark background */
+             color: white;
+             padding: var(--section-padding) 0;
+             text-align: center;
+         }
+
+         .who-i-help-section .section-title {
+             background: var(--gradient-3); /* Use gradient 3 for contrast */
+             -webkit-background-clip: text;
+             -webkit-text-fill-color: transparent;
+             background-clip: text;
+              margin-bottom: 4rem;
+         }
+
+         .who-grid {
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+             gap: 3rem;
+             max-width: 1000px; /* Limit width */
+             margin: 0 auto;
+              padding: 0 2rem;
+         }
+
+         .target-audience-card {
+             background: rgba(255, 255, 255, 0.1); /* White background with opacity */
+             border-radius: var(--border-radius-md);
+             padding: 2.5rem;
+             backdrop-filter: blur(8px); /* Subtle blur */
+             border: 1px solid rgba(255, 255, 255, 0.15);
+             text-align: center;
+             transition: all 0.3s ease;
+              /* Initial state for JS animation */
+             opacity: 0;
+             transform: translateY(50px);
+         }
+         .target-audience-card:hover {
+             transform: translateY(-8px);
+              background: rgba(255, 255, 255, 0.15);
+              box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+         }
+
+         .target-audience-card .icon {
+             font-size: 3.5rem;
+             margin-bottom: 1rem;
+             color: var(--accent-color); /* Use accent color */
+         }
+
+         .target-audience-card h3 {
+             font-size: 1.6rem;
+             font-weight: 600;
+             color: white;
+             margin-bottom: 1rem;
+         }
+         .target-audience-card p {
+             font-size: 1.1rem;
+             color: rgba(255, 255, 255, 0.8); /* Softer white */
+             line-height: 1.8;
+         }
+
+
+        /* Process Section (Optional but good) */
+         .process-section {
+             padding-top: var(--section-padding);
+             padding-bottom: var(--section-padding);
+             background: var(--bg-light);
+         }
+         .process-section .section-title {
+              text-align: center;
+              margin-bottom: 4rem;
+         }
+         .process-steps {
+             max-width: 900px;
+             margin: 0 auto;
+             display: grid;
+             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+             gap: 2.5rem;
+             padding: 0 2rem;
+         }
+
+         .process-step {
+             text-align: center;
+             /* Initial state for JS animation */
+             opacity: 0;
+             transform: translateY(50px);
+         }
+         .process-step .step-number {
+             width: 60px;
+             height: 60px;
+             margin: 0 auto 1rem;
+             background: var(--gradient-1);
+             border-radius: 50%;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             font-size: 1.8rem;
+             font-weight: 700;
+             color: white;
+             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+         }
+         .process-step h4 {
+             font-size: 1.3rem;
+             font-weight: 600;
+             color: var(--text-dark);
+             margin-bottom: 0.5rem;
+         }
+         .process-step p {
+             color: var(--text-medium);
+             font-size: 1rem;
+         }
+
+
+        /* Blog Integration (Consistent) */
+        .blog-integration {
+            background: var(--bg-dark);
+            color: white;
+            padding: 5rem 3rem;
+            margin-top: 6rem;
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+             /* Initial state for JS animation */
+            opacity: 0;
+            transform: translateY(50px);
+        }
+
+        .blog-integration h3 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .blog-integration p {
+            font-size: 1.15rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.9;
+            line-height: 1.8;
+             max-width: 800px;
+             margin-left: auto;
+             margin-right: auto;
+        }
+
+        /* Button Styling (Consistent across pages) */
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background: var(--gradient-2);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+             position: relative;
+             overflow: hidden;
+             z-index: 1;
+             text-align: center;
+        }
+
+         .btn span { position: relative; z-index: 1; } /* Added span wrapper */
+
+         .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.4s ease, height 0.4s ease;
+            z-index: 0;
+        }
+
+         .btn:hover::before { width: 300px; height: 300px; }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+        }
+
+
+        /* Footer (Consistent across pages) */
+        footer {
+            background: var(--bg-dark);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 4rem 2rem 1.5rem;
+            text-align: center;
+            font-size: 0.95rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 2.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            font-weight: 500;
+        }
+
+        .footer-links a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .social-links a:hover {
+            background: var(--accent-color);
+            color: var(--bg-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(240, 147, 251, 0.3);
+        }
+
+        /* Animations */
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+         /* Particles keyframe (keep for consistency) */
+        @keyframes float-particle {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+             50% { transform: translateY(50vh) translateX(10vw) rotate(180deg); opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(-10vw) rotate(360deg); opacity: 0; }
+        }
+
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+             .hero h1 { font-size: 3rem; }
+             .hero p { font-size: 1.1rem; }
+
+             .section-title { font-size: 2.5rem; }
+
+             .service-intro { margin-bottom: 4rem; }
+             .service-intro p { font-size: 1.1rem; }
+
+             .service-section .section-title { margin-bottom: 3rem;}
+             .service-grid { gap: 2rem; }
+             .service-card { padding: 1.5rem; }
+             .service-icon { font-size: 2.5rem; }
+             .service-title { font-size: 1.3rem; }
+             .service-description { font-size: 1rem; }
+             .service-links { gap: 0.5rem; font-size: 0.9rem; }
+
+
+             .who-i-help-section .section-title { margin-bottom: 3rem;}
+             .who-grid { gap: 2rem; }
+             .target-audience-card { padding: 2rem; }
+             .target-audience-card .icon { font-size: 3rem; }
+             .target-audience-card h3 { font-size: 1.4rem; }
+             .target-audience-card p { font-size: 1rem; }
+
+
+             .process-section .section-title { margin-bottom: 3rem;}
+             .process-steps { gap: 2rem; }
+             .process-step .step-number { width: 50px; height: 50px; font-size: 1.5rem;}
+             .process-step h4 { font-size: 1.2rem; }
+             .process-step p { font-size: 0.95rem; }
+
+
+             .blog-integration h3 { font-size: 2rem; }
+             .blog-integration p { font-size: 1.1rem; }
+        }
+
+
+        @media (max-width: 768px) {
+             /* Navigation mobile styles handled above */
+
+            .hero { padding: calc(var(--navbar-height) + 2rem) 1rem 3rem; }
+            .hero h1 { font-size: 2.5rem; }
+             .hero p { font-size: 1rem; }
+
+            .section-padding { padding: 4rem 0; } /* Less padding */
+
+            .section-title { font-size: 2rem; }
+
+            .service-intro { margin-bottom: 3rem; padding: 0 1rem;}
+             .service-intro p { font-size: 1rem;}
+
+             .service-section .section-title { margin-bottom: 2rem;}
+             .service-grid {
+                grid-template-columns: 1fr; /* Single column */
+                gap: 1.5rem; /* Less gap */
+                 padding: 0 1rem; /* Add padding */
+             }
+             .service-card {
+                 padding: 1.5rem;
+                 transform: translateY(0) !important; /* Disable animation on mobile */
+                 opacity: 1 !important; /* Disable animation on mobile */
+             }
+             .service-icon { font-size: 2rem; margin-bottom: 0.8rem;}
+             .service-title { font-size: 1.2rem;}
+             .service-description { font-size: 0.95rem; margin-bottom: 1rem;}
+             .service-links { gap: 0.5rem; padding-top: 0.8rem;}
+             .service-link { font-size: 0.9rem;}
+
+
+             .who-i-help-section { padding: 4rem 0; }
+             .who-i-help-section .section-title { margin-bottom: 2rem; font-size: 2rem;}
+             .who-grid { grid-template-columns: 1fr; gap: 1.5rem; padding: 0 1rem;}
+             .target-audience-card {
+                 padding: 1.5rem;
+                  transform: translateY(0) !important; /* Disable animation on mobile */
+                  opacity: 1 !important; /* Disable animation on mobile */
+             }
+             .target-audience-card .icon { font-size: 2.5rem;}
+             .target-audience-card h3 { font-size: 1.3rem;}
+             .target-audience-card p { font-size: 0.9rem;}
+
+
+             .process-section { padding: 4rem 0; }
+             .process-section .section-title { margin-bottom: 2rem; font-size: 2rem;}
+             .process-steps { grid-template-columns: 1fr; gap: 1.5rem; padding: 0 1rem;}
+             .process-step {
+                  transform: translateY(0) !important; /* Disable animation on mobile */
+                  opacity: 1 !important; /* Disable animation on mobile */
+             }
+             .process-step .step-number { width: 40px; height: 40px; font-size: 1.2rem; margin-bottom: 0.5rem;}
+             .process-step h4 { font-size: 1.1rem;}
+             .process-step p { font-size: 0.85rem;}
+
+
+             .blog-integration {
+                 padding: 3rem 1.5rem;
+                 margin-top: 4rem;
+                 transform: translateY(0) !important; /* Disable animation on mobile */
+                 opacity: 1 !important; /* Disable animation on mobile */
+                 margin-left: 1rem;
+                 margin-right: 1rem;
+             }
+             .blog-integration h3 { font-size: 1.8rem; margin-bottom: 1rem;}
+             .blog-integration p { font-size: 1rem; margin-bottom: 1.5rem;}
+
+            .btn { width: 80%; max-width: 300px; padding: 0.8rem 1.5rem;}
+
+            /* Footer mobile styles handled above */
+            .footer-links { gap: 1rem; }
+             .social-links { gap: 1rem; }
+        }
+
+         /* Ensure animations are off by default on mobile, enabled by JS if > 768px */
+         @media (max-width: 768px) {
+             .service-intro,
+             .service-section .section-title,
+             .service-grid, /* grid container */
+             .service-card,
+             .who-i-help-section .section-title,
+             .target-audience-card,
+             .process-section .section-title,
+             .process-step,
+             .blog-integration {
+                 opacity: 1 !important;
+                 transform: none !important;
+                 animation: none !important;
+             }
+         }
+
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">AI Consultant</div>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="my-story.html">My Story</a></li>
+                <li><a href="expertise.html">Expertise</a></li>
+                <li><a href="case-studies.html">Case Studies</a></li>
+                <li><a href="consulting-services.html" class="active">Services</a></li>
+                <li><a href="talks.html">Talks</a></li>
+                <li><a href="training.html">Training Programs</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+             <div class="nav-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section (Adapted) -->
+    <section class="hero">
+        <!-- Optional: Add particles div here for consistency if needed -->
+        <!-- <div class="particles" id="particles"></div> -->
+        <div class="hero-content">
+            <!-- Elements in Hero have data-animate for initial load animation -->
+            <h1 data-animate="slideInUp" data-delay="0.3">AI Consulting Services</h1>
+            <p data-animate="slideInUp" data-delay="0.5">Tailored AI solutions to transform your business and achieve measurable results.</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+        <section class="main-content">
+            <div class="container">
+
+                <!-- Service Introduction -->
+                <div class="service-intro" data-animate="slideInUp">
+                    <p>I provide expert AI consulting services designed to help organizations navigate the complexities of artificial intelligence and implement solutions that deliver tangible business value. My approach is collaborative, practical, and focused on achieving your strategic goals.</p>
+                </div>
+
+                <!-- Specific Service Offerings Section -->
+                <div class="service-section">
+                    <h2 class="section-title text-center" data-animate="slideInUp">Specific Service Offerings</h2>
+                     <!-- Service Grid (Observe grid for staggered card animation) -->
+                     <div class="service-grid" data-animate="slideInUp">
+
+                         <!-- Service Card 1: AI Strategy & Roadmap -->
+                         <div class="service-card">
+                             <div class="service-icon"><i class="fas fa-compass"></i></div>
+                             <h3 class="service-title">AI Strategy & Roadmap</h3>
+                             <p class="service-description">Develop a clear vision and actionable plan for integrating AI into your business, identifying high-impact opportunities and prioritizing initiatives.</p>
+                             <div class="service-links">
+                                 <a href="expertise.html#strategy" class="service-link"><i class="fas fa-brain"></i> Expertise</a>
+                                 <a href="case-studies.html#strategy-case" class="service-link"><i class="fas fa-chart-line"></i> Case Studies</a>
+                                 <a href="blog.html?tag=strategy" class="service-link"><i class="fas fa-pen-fancy"></i> Blog Posts</a>
+                             </div>
+                         </div>
+
+                         <!-- Service Card 2: Custom ML Model Development -->
+                         <div class="service-card">
+                             <div class="service-icon"><i class="fas fa-code"></i></div>
+                             <h3 class="service-title">Custom ML Model Development</h3>
+                             <p class="service-description">Design, build, and train bespoke machine learning models tailored to your specific problem, from data preparation to model evaluation.</p>
+                             <div class="service-links">
+                                 <a href="expertise.html#ml" class="service-link"><i class="fas fa-brain"></i> Expertise (ML)</a>
+                                 <a href="case-studies.html#ml-case" class="service-link"><i class="fas fa-chart-line"></i> Case Studies</a>
+                                 <a href="blog.html?tag=ml" class="service-link"><i class="fas fa-pen-fancy"></i> Blog Posts</a>
+                             </div>
+                         </div>
+
+                         <!-- Service Card 3: NLP Implementation -->
+                         <div class="service-card">
+                             <div class="service-icon"><i class="fas fa-comments"></i></div>
+                             <h3 class="service-title">NLP Implementation</h3>
+                             <p class="service-description">Apply Natural Language Processing for tasks like sentiment analysis, text classification, entity recognition, and building conversational AI interfaces.</p>
+                             <div class="service-links">
+                                 <a href="expertise.html#nlp" class="service-link"><i class="fas fa-brain"></i> Expertise (NLP)</a>
+                                 <a href="case-studies.html#nlp-case" class="service-link"><i class="fas fa-chart-line"></i> Case Studies</a>
+                                 <a href="blog.html?tag=nlp" class="service-link"><i class="fas fa-pen-fancy"></i> Blog Posts</a>
+                             </div>
+                         </div>
+
+                          <!-- Service Card 4: Computer Vision Solutions -->
+                         <div class="service-card">
+                             <div class="service-icon"><i class="fas fa-video"></i></div>
+                             <h3 class="service-title">Computer Vision Solutions</h3>
+                             <p class="service-description">Develop systems for image and video analysis, object detection, facial recognition, and other visual intelligence applications.</p>
+                             <div class="service-links">
+                                 <a href="expertise.html#cv" class="service-link"><i class="fas fa-brain"></i> Expertise (CV)</a>
+                                 <a href="case-studies.html#cv-case" class="service-link"><i class="fas fa-chart-line"></i> Case Studies</a>
+                                 <a href="blog.html?tag=cv" class="service-link"><i class="fas fa-pen-fancy"></i> Blog Posts</a>
+                             </div>
+                         </div>
+
+                          <!-- Service Card 5: MLOps & Deployment -->
+                         <div class="service-card">
+                             <div class="service-icon"><i class="fas fa-cogs"></i></div>
+                             <h3 class="service-title">MLOps & Deployment</h3>
+                             <p class="service-description">Build scalable, reliable, and maintainable production AI systems, covering deployment, monitoring, and pipeline automation.</p>
+                             <div class="service-links">
+                                 <a href="expertise.html#mlops" class="service-link"><i class="fas fa-brain"></i> Expertise (MLOps)</a>
+                                 <a href="case-studies.html#mlops-case" class="service-link"><i class="fas fa-chart-line"></i> Case Studies</a>
+                                 <a href="blog.html?tag=mlops" class="service-link"><i class="fas fa-pen-fancy"></i> Blog Posts</a>
+                             </div>
+                         </div>
+
+                           <!-- Service Card 6: AI Readiness Assessment -->
+                         <div class="service-card">
+                             <div class="service-icon"><i class="fas fa-chart-bar"></i></div>
+                             <h3 class="service-title">AI Readiness Assessment</h3>
+                             <p class="service-description">Evaluate your organization's current state, identify gaps, and recommend steps to prepare your data, infrastructure, and team for AI adoption.</p>
+                             <div class="service-links">
+                                 <a href="expertise.html#strategy" class="service-link"><i class="fas fa-brain"></i> Expertise (Strategy)</a>
+                                  <a href="training.html#readiness" class="service-link"><i class="fas fa-chalkboard-teacher"></i> Training</a>
+                                 <a href="blog.html?tag=readiness" class="service-link"><i class="fas fa-pen-fancy"></i> Blog Posts</a>
+                             </div>
+                         </div>
+                     </div>
+                </div>
+
+                 <!-- Who I Help Section -->
+                 <div class="who-i-help-section">
+                     <div class="container">
+                         <h2 class="section-title text-center" data-animate="slideInUp">Who I Help</h2>
+                          <div class="who-grid">
+                             <!-- Card/Block 1: Startups -->
+                             <div class="target-audience-card" data-animate="slideInLeft">
+                                 <div class="icon"><i class="fas fa-rocket"></i></div>
+                                 <h3>Startups</h3>
+                                 <p>If you're a startup building an AI-first product or needing to integrate AI for a competitive edge, I can provide the specialized expertise to validate ideas, build MVPs, and navigate the technical challenges for rapid iteration and growth.</p>
+                             </div>
+
+                             <!-- Card/Block 2: Project Owners -->
+                             <div class="target-audience-card" data-animate="slideInUp" data-delay="0.2">
+                                  <div class="icon"><i class="fas fa-tasks"></i></div>
+                                 <h3>Organizations with Specific Projects</h3>
+                                 <p>If you have a clearly defined AI project (e.g., build a recommendation engine, automate document processing, predict customer churn), I can lead or support the technical design and implementation from concept to deployment.</p>
+                             </div>
+
+                             <!-- Card/Block 3: Companies (Long-term/Embedded) -->
+                             <div class="target-audience-card" data-animate="slideInRight">
+                                  <div class="icon"><i class="fas fa-building"></i></div>
+                                 <h3>Companies Seeking Embedded Expertise</h3>
+                                 <p>If you're a larger company seeking deep, integrated AI expertise for a significant initiative or ongoing strategic role, let's explore how my background can complement your team and drive long-term AI capability and innovation within your organization.</p>
+                             </div>
+                          </div>
+                          <div class="cta-below-who" data-animate="slideInUp" data-delay="0.4" style="margin-top: 3rem;">
+                              <a href="contact.html" class="btn"><span>Discuss Your Specific Needs</span></a>
+                          </div>
+                     </div>
+                 </div>
+
+                <!-- Process Section (Optional but good) -->
+                 <div class="process-section">
+                     <div class="container">
+                         <h2 class="section-title text-center" data-animate="slideInUp">My Consulting Process</h2>
+                          <div class="process-steps">
+                              <div class="process-step" data-animate="slideInUp" data-delay="0">
+                                  <div class="step-number">1</div>
+                                  <h4>Discovery & Assessment</h4>
+                                  <p>Understanding your business goals, current challenges, and data landscape to identify AI opportunities.</p>
+                              </div>
+                               <div class="process-step" data-animate="slideInUp" data-delay="0.2">
+                                  <div class="step-number">2</div>
+                                  <h4>Strategy & Planning</h4>
+                                  <p>Developing a tailored AI strategy, defining the scope, objectives, and roadmap for the project.</p>
+                              </div>
+                               <div class="process-step" data-animate="slideInUp" data-delay="0.4">
+                                  <div class="step-number">3</div>
+                                  <h4>Development & Implementation</h4>
+                                  <p>Building, training, and refining AI models or systems, ensuring technical excellence and alignment with goals.</p>
+                              </div>
+                               <div class="process-step" data-animate="slideInUp" data-delay="0.6">
+                                  <div class="step-number">4</div>
+                                  <h4>Deployment & Integration</h4>
+                                  <p>Putting the AI solution into production, integrating it with existing systems, and ensuring scalability and reliability.</p>
+                              </div>
+                              <div class="process-step" data-animate="slideInUp" data-delay="0.8">
+                                  <div class="step-number">5</div>
+                                  <h4>Monitoring & Optimization</h4>
+                                  <p>Continuously monitoring performance, gathering feedback, and iterating on the solution for ongoing improvement.</p>
+                              </div>
+                          </div>
+                     </div>
+                 </div>
+
+
+                <!-- Blog Integration Section (Consistent) -->
+                 <div class="container">
+                     <div class="blog-integration" data-animate="slideInUp">
+                         <h3>Gain Deeper Insights</h3>
+                         <p>Explore my blog for articles covering various AI technologies, strategies, and implementation best practices. Find content that complements the services offered and helps you understand the potential of AI.</p>
+                         <a href="blog.html" class="btn"><span>Explore My Blog</span></a>
+                     </div>
+                 </div>
+
+
+            </div>
+        </section>
+    </main>
+
+
+    <!-- Footer (Consistent across pages) -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">Home</a>
+                <a href="my-story.html">My Story</a>
+                <a href="expertise.html">Expertise</a>
+                <a href="case-studies.html">Case Studies</a>
+                <a href="consulting-services.html">Services</a>
+                <a href="talks.html">Talks</a>
+                <a href="training.html">Training Programs</a>
+                <a href="blog.html">Blog</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fab fa-medium-m"></i></a>
+            </div>
+            <p>© <span id="current-year"></span> AI Consultant. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- Navbar Scroll Effect ---
+        const navbar = document.getElementById('navbar');
+        if (navbar) {
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        }
+
+        // --- Floating Particles (Optional for this page) ---
+        // Uncomment and ensure particles div exists in HTML if you want them here
+        /*
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            if (!particlesContainer) return;
+
+            const particleCount = window.innerWidth > 768 ? 80 : 40;
+            particlesContainer.innerHTML = '';
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                const size = Math.random() * 4 + 2;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 20 + 100 + '%'; // Start below viewport
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+                particle.style.opacity = Math.random() * 0.5 + 0.3;
+                particlesContainer.appendChild(particle);
+            }
+        }
+        */
+
+
+        // --- Intersection Observer for Scroll Animations ---
+        // Select all elements with data-animate that are NOT within the Hero section
+        const scrollAnimatedElements = document.querySelectorAll('main [data-animate]');
+
+
+        const scrollObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const targetElement = entry.target;
+                    const delay = targetElement.dataset.delay ? parseFloat(targetElement.dataset.delay) * 1000 : 0;
+                    const animationType = targetElement.dataset.animate || 'fadeIn'; // Default to fadeIn
+
+                    setTimeout(() => {
+                        // Apply the animation
+                        targetElement.style.animation = `${animationType} 0.8s ease-out forwards`;
+
+                        // Special handling for service grid to trigger card animations
+                        if (targetElement.classList.contains('service-grid')) {
+                             targetElement.querySelectorAll('.service-card').forEach((card, index) => {
+                                 // Cards already have their initial state set by the DOMContentLoaded loop
+                                 // Apply staggered animation to the card
+                                 setTimeout(() => {
+                                     card.style.animation = `slideInUp 0.8s ease-out forwards`;
+                                 }, index * 100); // Stagger delay for each card within the grid
+                             });
+                        }
+                         // Special handling for who grid to trigger card animations
+                        if (targetElement.classList.contains('who-grid')) {
+                             targetElement.querySelectorAll('.target-audience-card').forEach((card, index) => {
+                                 // Cards already have their initial state set by the DOMContentLoaded loop
+                                 // Apply staggered animation to the card (using their specific animation type/delay)
+                                 const cardDelay = card.dataset.delay ? parseFloat(card.dataset.delay) * 1000 : 0;
+                                 const cardAnimationType = card.dataset.animate || 'slideInUp';
+                                 setTimeout(() => {
+                                     card.style.animation = `${cardAnimationType} 0.8s ease-out forwards`;
+                                 }, index * 100 + cardDelay); // Add index delay and the card's own delay
+                             });
+                             // Unobserve the grid after starting child animations
+                             // This assumes the cards don't also need individual observation
+                             // Let's remove the grid from observation after its children are triggered
+                             observer.unobserve(targetElement);
+                        }
+                         // Special handling for process steps grid to trigger step animations
+                        if (targetElement.classList.contains('process-steps')) {
+                             targetElement.querySelectorAll('.process-step').forEach((step, index) => {
+                                  const stepDelay = step.dataset.delay ? parseFloat(step.dataset.delay) * 1000 : 0;
+                                  const stepAnimationType = step.dataset.animate || 'slideInUp';
+                                 setTimeout(() => {
+                                     step.style.animation = `${stepAnimationType} 0.8s ease-out forwards`;
+                                 }, index * 80 + stepDelay); // Stagger delay for each step
+                             });
+                             observer.unobserve(targetElement);
+                        }
+
+
+                    }, delay);
+
+                    // Unobserve the element itself IF it's not a container triggering children
+                    if (!targetElement.classList.contains('service-grid') && !targetElement.classList.contains('who-grid') && !targetElement.classList.contains('process-steps')) {
+                         observer.unobserve(targetElement);
+                    }
+                }
+                 /* No action needed when element is not intersecting */
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -100px 0px' }); // Trigger when 10% visible or 100px from bottom
+
+
+        // --- Apply initial hidden state and Trigger load animations ---
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Services DOM fully loaded and parsed');
+
+            // Optional: Create particles if div exists
+            // createParticles();
+
+            // Set current year in footer
+            const currentYearSpan = document.getElementById('current-year');
+            if (currentYearSpan) {
+                currentYearSpan.textContent = new Date().getFullYear();
+            }
+
+            // Animate elements that should appear on page load (Hero elements)
+            const loadAnimatedElements = document.querySelectorAll('.hero [data-animate]');
+
+            loadAnimatedElements.forEach(el => {
+                 const delay = el.dataset.delay ? parseFloat(el.dataset.delay) * 1000 : 0;
+                 const animationType = el.dataset.animate || 'fadeIn';
+
+                 setTimeout(() => {
+                      el.style.animation = `${animationType} 0.8s ease-out forwards`;
+                 }, delay);
+            });
+
+
+            // Set initial hidden state for elements that animate on scroll
+             scrollAnimatedElements.forEach(el => {
+                 el.style.opacity = '0';
+                 const animateType = el.dataset.animate;
+                 if (animateType === 'slideInUp') el.style.transform = 'translateY(50px)';
+                 else if (animateType === 'slideInLeft') el.style.transform = 'translateX(-50px)';
+                 else if (animateType === 'slideInRight') el.style.transform = 'translateX(50px)';
+                 // fadeIn doesn't need initial transform
+
+                  // Start observing the element
+                 scrollObserver.observe(el);
+
+                 // Service cards, target audience cards, and process steps also need initial state set
+                 // even though they are animated when their parent grid/container is observed.
+                 // This ensures they are hidden before the container comes into view.
+                 if (el.classList.contains('service-card') || el.classList.contains('target-audience-card') || el.classList.contains('process-step')) {
+                      el.style.opacity = '0';
+                       // Use a common initial transform for these children for simplicity
+                      el.style.transform = 'translateY(30px)';
+                 }
+
+             });
+
+        });
+
+
+        // --- Mobile menu toggle ---
+        const navToggle = document.querySelector('.nav-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        if (navToggle && navLinks) { // Check if elements exist
+            navToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                navToggle.classList.toggle('active'); // Toggle class on toggle icon for animation
+                // Optional: Prevent body scroll when menu is open
+                 // document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+            });
+
+             // Close menu when a link is clicked (mobile)
+             navLinks.querySelectorAll('a').forEach(link => {
+                 link.addEventListener('click', () => {
+                     if (navLinks.classList.contains('active')) {
+                         navLinks.classList.remove('active');
+                         navToggle.classList.remove('active');
+                         // Optional: Restore body scroll
+                         // document.body.style.overflow = '';
+                     }
+                 });
+             });
+        }
+
+
+        // --- Smooth scrolling for anchor links ---
+         // This page has no internal anchor links (#...).
+         // Keeping the function for completeness and future use.
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                 if (this.getAttribute('href').length > 1) {
+                     e.preventDefault();
+                 } else {
+                     return; // If href is just "#", let it scroll to top
+                 }
+
+                // Close mobile menu if open
+                 if (navLinks && navLinks.classList.contains('active')) {
+                     navLinks.classList.remove('active');
+                     navToggle.classList.remove('active');
+                 }
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    const offset = navbar ? navbar.offsetHeight : 0;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
